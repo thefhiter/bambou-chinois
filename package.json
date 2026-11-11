@@ -1,0 +1,1 @@
+{"type":"module","name":"bambou-chinois","private":true,"version":"1.0.0","scripts":{"start":"python -m http.server 9116","assets":"node tools/build-assets.mjs","audio":"python tools/gen_audio.py"}}

@@ -1,0 +1,861 @@
+{
+ "clips": [
+  {
+   "id": "c_4eba",
+   "text": "人"
+  },
+  {
+   "id": "c_5c0f",
+   "text": "小"
+  },
+  {
+   "id": "c_5973",
+   "text": "女"
+  },
+  {
+   "id": "c_4e0d",
+   "text": "不"
+  },
+  {
+   "id": "c_4e5f",
+   "text": "也"
+  },
+  {
+   "id": "c_4e2d",
+   "text": "中"
+  },
+  {
+   "id": "c_4e48",
+   "text": "么"
+  },
+  {
+   "id": "c_53cb",
+   "text": "友"
+  },
+  {
+   "id": "c_53eb",
+   "text": "叫"
+  },
+  {
+   "id": "c_4ec0",
+   "text": "什"
+  },
+  {
+   "id": "c_597d",
+   "text": "好"
+  },
+  {
+   "id": "c_5979",
+   "text": "她"
+  },
+  {
+   "id": "c_540d",
+   "text": "名"
+  },
+  {
+   "id": "c_5b57",
+   "text": "字"
+  },
+  {
+   "id": "c_95ee",
+   "text": "问"
+  },
+  {
+   "id": "c_5417",
+   "text": "吗"
+  },
+  {
+   "id": "c_4f60",
+   "text": "你"
+  },
+  {
+   "id": "c_6211",
+   "text": "我"
+  },
+  {
+   "id": "c_670b",
+   "text": "朋"
+  },
+  {
+   "id": "c_56fd",
+   "text": "国"
+  },
+  {
+   "id": "c_6cd5",
+   "text": "法"
+  },
+  {
+   "id": "c_662f",
+   "text": "是"
+  },
+  {
+   "id": "c_5462",
+   "text": "呢"
+  },
+  {
+   "id": "c_7f8e",
+   "text": "美"
+  },
+  {
+   "id": "c_54ea",
+   "text": "哪"
+  },
+  {
+   "id": "c_8bf7",
+   "text": "请"
+  },
+  {
+   "id": "c_8c01",
+   "text": "谁"
+  },
+  {
+   "id": "w_wo",
+   "text": "我"
+  },
+  {
+   "id": "w_ni",
+   "text": "你"
+  },
+  {
+   "id": "w_ta",
+   "text": "她"
+  },
+  {
+   "id": "w_shi",
+   "text": "是"
+  },
+  {
+   "id": "w_ren",
+   "text": "人"
+  },
+  {
+   "id": "w_hao",
+   "text": "好"
+  },
+  {
+   "id": "w_haoren",
+   "text": "好人"
+  },
+  {
+   "id": "w_guo",
+   "text": "国"
+  },
+  {
+   "id": "w_zhongguo",
+   "text": "中国"
+  },
+  {
+   "id": "w_zhongguoren",
+   "text": "中国人"
+  },
+  {
+   "id": "w_tunisi",
+   "text": "突尼斯"
+  },
+  {
+   "id": "w_tunisiren",
+   "text": "突尼斯人"
+  },
+  {
+   "id": "w_faguo",
+   "text": "法国"
+  },
+  {
+   "id": "w_faguoren",
+   "text": "法国人"
+  },
+  {
+   "id": "w_meiguo",
+   "text": "美国"
+  },
+  {
+   "id": "w_meiguoren",
+   "text": "美国人"
+  },
+  {
+   "id": "w_riben",
+   "text": "日本"
+  },
+  {
+   "id": "w_ribenren",
+   "text": "日本人"
+  },
+  {
+   "id": "w_yindu",
+   "text": "印度"
+  },
+  {
+   "id": "w_yinduren",
+   "text": "印度人"
+  },
+  {
+   "id": "w_na",
+   "text": "哪"
+  },
+  {
+   "id": "w_naguo",
+   "text": "哪国"
+  },
+  {
+   "id": "w_naguoren",
+   "text": "哪国人"
+  },
+  {
+   "id": "w_ne",
+   "text": "呢"
+  },
+  {
+   "id": "w_nine",
+   "text": "你呢"
+  },
+  {
+   "id": "w_shei",
+   "text": "谁"
+  },
+  {
+   "id": "w_nv",
+   "text": "女"
+  },
+  {
+   "id": "w_pengyou",
+   "text": "朋友"
+  },
+  {
+   "id": "w_nvpengyou",
+   "text": "女朋友"
+  },
+  {
+   "id": "w_wonvpengyou",
+   "text": "我女朋友"
+  },
+  {
+   "id": "w_jiao",
+   "text": "叫"
+  },
+  {
+   "id": "w_shenme",
+   "text": "什么"
+  },
+  {
+   "id": "w_mingzi",
+   "text": "名字"
+  },
+  {
+   "id": "w_shenmemingzi",
+   "text": "什么名字"
+  },
+  {
+   "id": "w_qing",
+   "text": "请"
+  },
+  {
+   "id": "w_wen",
+   "text": "问"
+  },
+  {
+   "id": "w_qingwen",
+   "text": "请问"
+  },
+  {
+   "id": "w_bu",
+   "text": "不"
+  },
+  {
+   "id": "w_bushi",
+   "text": "不是"
+  },
+  {
+   "id": "w_ye",
+   "text": "也"
+  },
+  {
+   "id": "w_ma",
+   "text": "吗"
+  },
+  {
+   "id": "w_yidali",
+   "text": "意大利"
+  },
+  {
+   "id": "w_xibanya",
+   "text": "西班牙"
+  },
+  {
+   "id": "w_deguo",
+   "text": "德国"
+  },
+  {
+   "id": "w_yingguo",
+   "text": "英国"
+  },
+  {
+   "id": "w_aodaliya",
+   "text": "澳大利亚"
+  },
+  {
+   "id": "w_sami",
+   "text": "萨米"
+  },
+  {
+   "id": "w_xiaomei",
+   "text": "小美"
+  },
+  {
+   "id": "w_mali",
+   "text": "玛丽"
+  },
+  {
+   "id": "s_nishi",
+   "text": "你是哪国人?"
+  },
+  {
+   "id": "s_wozg",
+   "text": "我是中国人。"
+  },
+  {
+   "id": "s_nine",
+   "text": "你呢?"
+  },
+  {
+   "id": "s_wotn",
+   "text": "我是突尼斯人。"
+  },
+  {
+   "id": "s_tashei",
+   "text": "她是谁?"
+  },
+  {
+   "id": "s_tanvpy",
+   "text": "她是我女朋友。"
+  },
+  {
+   "id": "s_tajiao",
+   "text": "她叫什么名字?"
+  },
+  {
+   "id": "s_tamali",
+   "text": "她叫玛丽。"
+  },
+  {
+   "id": "s_niyema",
+   "text": "请问,你也是突尼斯人吗?"
+  },
+  {
+   "id": "s_bushi",
+   "text": "不,我不是突尼斯人。"
+  },
+  {
+   "id": "s_wofg",
+   "text": "我是法国人。"
+  },
+  {
+   "id": "s_wojiao",
+   "text": "我叫萨米。"
+  },
+  {
+   "id": "s_nijiao",
+   "text": "你叫什么名字?"
+  },
+  {
+   "id": "s_woyeshi",
+   "text": "我也是突尼斯人。"
+  },
+  {
+   "id": "s_woqingni",
+   "text": "我请你。"
+  },
+  {
+   "id": "s_niwenta",
+   "text": "你问她。"
+  },
+  {
+   "id": "s_d1",
+   "text": "小美,你是哪国人?",
+   "voice": "zh-CN-YunxiNeural"
+  },
+  {
+   "id": "s_d2",
+   "text": "我是中国人。你呢?",
+   "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  {
+   "id": "s_d8",
+   "text": "玛丽,请问,你也是突尼斯人吗?",
+   "voice": "zh-CN-XiaoxiaoNeural"
+  },
+  {
+   "id": "s_d9",
+   "text": "不,我不是突尼斯人。我是法国人。",
+   "voice": "zh-CN-XiaoyiNeural"
+  },
+  {
+   "id": "g_na_0",
+   "text": "你是哪国人?"
+  },
+  {
+   "id": "g_na_1",
+   "text": "她叫什么名字?"
+  },
+  {
+   "id": "g_guo_0",
+   "text": "中国人"
+  },
+  {
+   "id": "g_guo_1",
+   "text": "法国人"
+  },
+  {
+   "id": "g_guo_2",
+   "text": "突尼斯人"
+  },
+  {
+   "id": "g_guo_3",
+   "text": "日本人"
+  },
+  {
+   "id": "g_shei_0",
+   "text": "她是谁?"
+  },
+  {
+   "id": "g_shei_1",
+   "text": "她是我女朋友。"
+  },
+  {
+   "id": "g_bu_0",
+   "text": "我不是法国人。"
+  },
+  {
+   "id": "g_bu_1",
+   "text": "她不是中国人。"
+  },
+  {
+   "id": "g_ye_0",
+   "text": "我也是突尼斯人。"
+  },
+  {
+   "id": "g_ye_1",
+   "text": "你也是法国人吗?"
+  },
+  {
+   "id": "g_ma_0",
+   "text": "你是突尼斯人吗?"
+  },
+  {
+   "id": "g_ma_1",
+   "text": "你呢?"
+  },
+  {
+   "id": "g_qingwen_0",
+   "text": "请问,你是哪国人?"
+  }
+ ],
+ "syllables": [
+  "a",
+  "o",
+  "e",
+  "er",
+  "ai",
+  "ei",
+  "ao",
+  "ou",
+  "an",
+  "en",
+  "ang",
+  "eng",
+  "ba",
+  "bo",
+  "bai",
+  "bei",
+  "bao",
+  "ban",
+  "ben",
+  "bang",
+  "beng",
+  "pa",
+  "po",
+  "pai",
+  "pei",
+  "pao",
+  "pou",
+  "pan",
+  "pen",
+  "pang",
+  "peng",
+  "ma",
+  "mo",
+  "me",
+  "mai",
+  "mei",
+  "mao",
+  "mou",
+  "man",
+  "men",
+  "mang",
+  "meng",
+  "fa",
+  "fo",
+  "fei",
+  "fou",
+  "fan",
+  "fen",
+  "fang",
+  "feng",
+  "da",
+  "de",
+  "dai",
+  "dei",
+  "dao",
+  "dou",
+  "dan",
+  "den",
+  "dang",
+  "deng",
+  "dong",
+  "ta",
+  "te",
+  "tai",
+  "tao",
+  "tou",
+  "tan",
+  "tang",
+  "teng",
+  "tong",
+  "na",
+  "ne",
+  "nai",
+  "nei",
+  "nao",
+  "nou",
+  "nan",
+  "nen",
+  "nang",
+  "neng",
+  "nong",
+  "la",
+  "le",
+  "lai",
+  "lei",
+  "lao",
+  "lou",
+  "lan",
+  "lang",
+  "leng",
+  "long",
+  "za",
+  "ze",
+  "zi",
+  "zai",
+  "zei",
+  "zao",
+  "zou",
+  "zan",
+  "zen",
+  "zang",
+  "zeng",
+  "zong",
+  "ca",
+  "ce",
+  "ci",
+  "cai",
+  "cao",
+  "cou",
+  "can",
+  "cen",
+  "cang",
+  "ceng",
+  "cong",
+  "sa",
+  "se",
+  "si",
+  "sai",
+  "sao",
+  "sou",
+  "san",
+  "sen",
+  "sang",
+  "seng",
+  "song",
+  "zha",
+  "zhe",
+  "zhi",
+  "zhai",
+  "zhei",
+  "zhao",
+  "zhou",
+  "zhan",
+  "zhen",
+  "zhang",
+  "zheng",
+  "zhong",
+  "cha",
+  "che",
+  "chi",
+  "chai",
+  "chao",
+  "chou",
+  "chan",
+  "chen",
+  "chang",
+  "cheng",
+  "chong",
+  "sha",
+  "she",
+  "shi",
+  "shai",
+  "shei",
+  "shao",
+  "shou",
+  "shan",
+  "shen",
+  "shang",
+  "sheng",
+  "re",
+  "ri",
+  "rao",
+  "rou",
+  "ran",
+  "ren",
+  "rang",
+  "reng",
+  "rong",
+  "ga",
+  "ge",
+  "gai",
+  "gei",
+  "gao",
+  "gou",
+  "gan",
+  "gen",
+  "gang",
+  "geng",
+  "gong",
+  "ka",
+  "ke",
+  "kai",
+  "kei",
+  "kao",
+  "kou",
+  "kan",
+  "ken",
+  "kang",
+  "keng",
+  "kong",
+  "ha",
+  "he",
+  "hai",
+  "hei",
+  "hao",
+  "hou",
+  "han",
+  "hen",
+  "hang",
+  "heng",
+  "hong",
+  "yi",
+  "ya",
+  "yao",
+  "ye",
+  "you",
+  "yan",
+  "yin",
+  "yang",
+  "ying",
+  "yong",
+  "bi",
+  "biao",
+  "bie",
+  "bian",
+  "bin",
+  "bing",
+  "pi",
+  "piao",
+  "pie",
+  "pian",
+  "pin",
+  "ping",
+  "mi",
+  "miao",
+  "mie",
+  "miu",
+  "mian",
+  "min",
+  "ming",
+  "di",
+  "diao",
+  "die",
+  "diu",
+  "dian",
+  "ding",
+  "ti",
+  "tiao",
+  "tie",
+  "tian",
+  "ting",
+  "ni",
+  "niao",
+  "nie",
+  "niu",
+  "nian",
+  "nin",
+  "niang",
+  "ning",
+  "li",
+  "lia",
+  "liao",
+  "lie",
+  "liu",
+  "lian",
+  "lin",
+  "liang",
+  "ling",
+  "ji",
+  "jia",
+  "jiao",
+  "jie",
+  "jiu",
+  "jian",
+  "jin",
+  "jiang",
+  "jing",
+  "jiong",
+  "qi",
+  "qia",
+  "qiao",
+  "qie",
+  "qiu",
+  "qian",
+  "qin",
+  "qiang",
+  "qing",
+  "qiong",
+  "xi",
+  "xia",
+  "xiao",
+  "xie",
+  "xiu",
+  "xian",
+  "xin",
+  "xiang",
+  "xing",
+  "xiong",
+  "wu",
+  "wa",
+  "wo",
+  "wai",
+  "wei",
+  "wan",
+  "wen",
+  "wang",
+  "weng",
+  "yu",
+  "yue",
+  "yuan",
+  "yun",
+  "bu",
+  "pu",
+  "mu",
+  "fu",
+  "du",
+  "duo",
+  "dui",
+  "duan",
+  "dun",
+  "tu",
+  "tuo",
+  "tui",
+  "tuan",
+  "tun",
+  "nu",
+  "nuo",
+  "nuan",
+  "nv",
+  "nve",
+  "lu",
+  "luo",
+  "luan",
+  "lun",
+  "lv",
+  "lve",
+  "zu",
+  "zuo",
+  "zui",
+  "zuan",
+  "zun",
+  "cu",
+  "cuo",
+  "cui",
+  "cuan",
+  "cun",
+  "su",
+  "suo",
+  "sui",
+  "suan",
+  "sun",
+  "zhu",
+  "zhua",
+  "zhuo",
+  "zhuai",
+  "zhui",
+  "zhuan",
+  "zhun",
+  "zhuang",
+  "chu",
+  "chua",
+  "chuo",
+  "chuai",
+  "chui",
+  "chuan",
+  "chun",
+  "chuang",
+  "shu",
+  "shua",
+  "shuo",
+  "shuai",
+  "shui",
+  "shuan",
+  "shun",
+  "shuang",
+  "ru",
+  "rua",
+  "ruo",
+  "rui",
+  "ruan",
+  "run",
+  "ju",
+  "jue",
+  "juan",
+  "jun",
+  "qu",
+  "que",
+  "quan",
+  "qun",
+  "xu",
+  "xue",
+  "xuan",
+  "xun",
+  "gu",
+  "gua",
+  "guo",
+  "guai",
+  "gui",
+  "guan",
+  "gun",
+  "guang",
+  "ku",
+  "kua",
+  "kuo",
+  "kuai",
+  "kui",
+  "kuan",
+  "kun",
+  "kuang",
+  "hu",
+  "hua",
+  "huo",
+  "huai",
+  "hui",
+  "huan",
+  "hun",
+  "huang"
+ ]
+}
