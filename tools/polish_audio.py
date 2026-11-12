@@ -55,6 +55,44 @@ def polish(path):
     return True
 
 
+def emphasise_onset(path, gain_db=8.0):
+    """Make the breathy consonant that opens a clip louder (pinyin h = the "kh" of Arabic خ, which the
+    voice says very softly). Only the noise before the vowel is raised. False if there is no such noise."""
+    x = _decode(path)
+    win, hop, nfft = int(0.02 * SR), int(0.005 * SR), 1024
+    n = 1 + (len(x) - win) // hop
+    if n < 20:
+        return False
+    frames = np.stack([x[i * hop:i * hop + win] for i in range(n)]) * np.hanning(win)
+    power = np.abs(np.fft.rfft(frames, nfft)) ** 2
+    freq = np.fft.rfftfreq(nfft, 1 / SR)
+    energy = power.sum(1)
+    low = power[:, freq < 500].sum(1) / (energy + 1e-12)
+    peak = energy.max()
+    heard = np.where(energy > 0.0005 * peak)[0]
+    if len(heard) == 0:
+        return False
+    start = heard[0]
+    voiced = [i for i in range(start, n - 2) if low[i] > 0.35 and energy[i] > 0.05 * peak and low[i + 1] > 0.35]
+    if not voiced or (voiced[0] - start) * hop < 0.04 * SR:
+        return False
+    a, b = start * hop, voiced[0] * hop           # the consonant's noise: samples a..b
+    gain = np.ones(len(x), dtype=np.float32)
+    g = 10 ** (gain_db / 20)
+    ramp = int(0.02 * SR)
+    a0 = max(0, a - ramp // 2)
+    gain[a0:b] = g
+    gain[a0:a0 + ramp // 2] = np.linspace(1, g, ramp // 2)
+    end = min(len(x), b + ramp)
+    gain[b:end] = np.linspace(g, 1, end - b)      # glide back to normal as the vowel starts
+    y = x * gain
+    top = np.max(np.abs(y))
+    if top > 0.98:
+        y *= 0.98 / top
+    _encode(y, path)
+    return True
+
+
 def cut_first(path):
     """Keep only the first syllable of a two-syllable take whose second syllable starts with a stop
     consonant (e.g. 屋 + 的): the cut falls in the short silence of the stop. False if there is none."""

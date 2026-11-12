@@ -222,6 +222,7 @@ export const INITIALS = [
   { s: 'b', ex: 'bu4', h: T('Non aspiré : comme le « p » français, sans souffle.', 'غير مهموس: مثل «p» الفرنسية دون نفخة هواء.', 'Unaspirated: like the "p" in "spy", no puff of air.') },
   { s: 'p', ex: 'peng2', h: T('Aspiré : « p » avec un souffle (p’h).', 'مهموس: «p» مع نفخة هواء (p’h).', 'Aspirated: "p" with a strong puff of air.') },
   { s: 'f', ex: 'fa3', h: T('Comme le « f » français.', 'مثل «ف» العربية.', 'Like English "f".') },
+  { s: 'h', ex: 'hao3', h: T('Raclé au fond de la gorge, comme la « خ » arabe (kh) ou la jota espagnole, en plus doux : hǎo ≈ « khao ».', 'من الحلق مثل «خ» العربية لكن أخفّ: hǎo ≈ «خاو».', 'From the back of the throat, like Arabic خ or the "ch" in Scottish "loch", but softer: hǎo ≈ "khao".') },
   { s: 't', ex: 'ta1', h: T('Aspiré : « t » avec un souffle (t’h).', 'مهموس: «ت» مع نفخة هواء.', 'Aspirated: "t" with a puff of air.') },
   { s: 'q', ex: 'qing3', h: T('« tch » avec un souffle, langue contre le palais.', '«تش» مع نفخة هواء، واللسان على الحنك.', '"ch" with a puff of air, tongue flat against the palate.') },
   { s: 'r', ex: 'ren2', h: T('Entre le « j » français et le « r » anglais.', 'بين «ج» الفرنسية (j) و«r» الإنجليزية.', 'Between French "j" and English "r".') },

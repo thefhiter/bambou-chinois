@@ -19,11 +19,12 @@ from pypinyin import pinyin, lazy_pinyin, Style
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import tonecheck
-from polish_audio import polish, cut_first
+from polish_audio import polish, cut_first, emphasise_onset
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 VOICE = 'zh-CN-XiaoxiaoNeural'
-RECIPE = 'v4'   # bump to record every lesson clip again
+RECIPE = 'v5'   # bump to record every lesson clip again
+SINGLE_RATE = -30   # one-syllable lesson words are said slower than phrases (-18): they are very short
 
 # What is sent to the voice when it would misread the real text. The app still shows the real text.
 #   哪: every zh-CN voice says "něi" (colloquial); the textbook teaches nǎ. 乸 is read as a plain nǎ.
@@ -55,6 +56,12 @@ WAYS = {
     4: [('', 0, 0), ('！', 0, 0), ('，', 0, 0), ('！', -15, 0), ('的话', -15, 0), ('吧', -15, 0)],
     5: [(s, 10, p) for p in (0, -10, -18, -25) for s in ('：', '，', '')],   # neutral tone: light, lower, shorter
 }
+
+
+def starts_with_h(ch):
+    """Pinyin h (not zh/ch/sh) is the throat sound of Arabic خ; the voice says it too softly, so the
+    clips that begin with it get that sound raised (polish_audio.emphasise_onset)."""
+    return lazy_pinyin(ch)[0].startswith('h')
 
 
 def han(text):
@@ -106,7 +113,7 @@ class Studio:
     async def judge(self, path, tone):
         return await asyncio.get_running_loop().run_in_executor(self.pool, tonecheck.judge, path, tone, self.ref)
 
-    async def syllable(self, chars, tone, dest, base_rate, existing=None):
+    async def syllable(self, chars, tone, dest, base_rate, existing=None, kh=False):
         """Record one syllable so that its tone measures right, and put it at `dest`.
         `existing` = (char, way) of a take already at `dest`: kept if it passes.
         Returns (char, way, is_the_existing_take), or None when no take carries the tone."""
@@ -125,6 +132,8 @@ class Studio:
                         continue
                 if suffix in CARRIERS and not cut_first(path):
                     continue
+                if kh:
+                    emphasise_onset(path)
                 polish(path)   # measured as it will be heard
                 ok, dist, _ = await self.judge(path, tone)
                 if ok and (best is None or dist < best[0]):
@@ -174,14 +183,18 @@ async def main():
             return True
         chars = han(c['text'])
         single = len(chars) == 1 and not c.get('voice')
+        rate = SINGLE_RATE if single else -18
+        kh = bool(chars) and c['text'].startswith(chars[0]) and starts_with_h(chars[0])
         async with studio.net:
-            if not await tts(text, dest, c.get('voice')):
+            if not await tts(text, dest, c.get('voice'), rate):
                 return False
+        if kh:
+            emphasise_onset(dest)
         polish(dest)
         if single:   # the plain take is the fallback; a take whose tone measures right replaces it
             ch = chars[0]
             tone = LESSON_TONE.get(ch) or int(lazy_pinyin(ch, style=Style.TONE3, neutral_tone_with_five=True)[0][-1])
-            if await studio.syllable([ch], tone, dest, -18, (ch, '')) is None:
+            if await studio.syllable([ch], tone, dest, rate, (ch, ''), kh) is None:
                 notes.append(f'lesson clip {c["id"]} {ch}: tone {tone} did not measure right, kept the plain take')
         made['w/' + c['id']] = sig
         return True
@@ -200,17 +213,21 @@ async def main():
     async def chart_clip(k):
         dest = os.path.join(pdir, k + '.mp3')
         chars = cands[k][:6]
+        kh = k.startswith('h')
         existing = None
         if os.path.exists(dest) and os.path.getsize(dest) > 500:
             if 'py/' + k in made:          # recorded by this script: check it again, keep it if it passes
                 ch, _, way = made['py/' + k].partition(' ')
-                existing = (ch, way)
+                if kh and not way.endswith('kh'):   # recorded before the h sound was raised
+                    emphasise_onset(dest)
+                    polish(dest)
+                existing = (ch, way.removesuffix(' kh').removesuffix('kh'))
             elif old_chars.get(k):         # a clip from before the tone check
                 existing = (old_chars[k], '')
                 polish(dest)
         if existing:
             chars = [existing[0]] + [c for c in chars if c != existing[0]][:5]
-        take = await studio.syllable(chars, int(k[-1]), dest, -25, existing)
+        take = await studio.syllable(chars, int(k[-1]), dest, -25, existing, kh)
         if take is None:
             notes.append(f'chart {k} ({"".join(chars)}): no take carries tone {k[-1]} - left without sound')
             if os.path.exists(dest):
@@ -218,7 +235,7 @@ async def main():
             made.pop('py/' + k, None)
             return False
         ch, way, kept = take
-        made['py/' + k] = f'{ch} {way}'.strip()
+        made['py/' + k] = f'{ch} {way}'.strip() + (' kh' if kh else '')
         chosen[k] = ch
         return True
 
