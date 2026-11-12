@@ -19,15 +19,23 @@ function playUrl(url, rate = 1) {
   const my = ++token;
   window.speechSynthesis && speechSynthesis.cancel();
   return new Promise(res => {
+    let finished = false, guard;
+    const done = ok => {
+      if (finished) return;
+      finished = true;
+      clearInterval(guard);
+      if (my === token) el.onended = el.onerror = null;   // a newer clip owns the handlers: leave them alone
+      res(ok);
+    };
     el.pause();
+    el.onended = () => done(true);
+    el.onerror = () => done(false);
     el.src = url;
     el.playbackRate = rate;
     el.preservesPitch = true;
-    const done = ok => { el.onended = el.onerror = null; res(ok); };
-    el.onended = () => done(true);
-    el.onerror = () => done(false);
     el.play().catch(() => done(false));
-    const guard = setInterval(() => { if (my !== token) { clearInterval(guard); done(false); } else if (el.ended || el.error) clearInterval(guard); }, 200);
+    // safety net: another clip took over, or the browser never fired "ended"
+    guard = setInterval(() => { if (my !== token || el.error) done(false); else if (el.ended) done(true); }, 200);
   });
 }
 

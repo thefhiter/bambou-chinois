@@ -17,7 +17,7 @@ Every character and word goes through the same six moves:
 | # | Move | In the app |
 |---|------|-----------|
 | 1 | **See** | The character draws itself stroke by stroke, with a memory picture (what its parts mean). |
-| 2 | **Hear** | Recorded audio for every word and sentence, at normal and slow speed. |
+| 2 | **Hear** | Recorded audio for every word and sentence, at normal and slow speed. Every clip's tone is measured before it ships (see *How the audio is checked*). |
 | 3 | **Trace** | Write over the model with a finger or mouse; wrong strokes are rejected. |
 | 4 | **Write from memory** | The model disappears. Too many slips and the character comes back later in the session. |
 | 5 | **Say** | Speak into the microphone: the app compares your syllables and tones with the model. |
@@ -37,6 +37,25 @@ Every character and word goes through the same six moves:
 - Speech checking uses the browser's speech recognition (Chrome, Edge, Android Chrome, Safari) and needs Internet. On other browsers the app records you and plays your voice next to the model so you can compare.
 - The tone trainer works everywhere there is a microphone, offline too.
 - The microphone only works on `https://` or `localhost`.
+
+## How the audio is checked
+
+The clips are synthesised (Microsoft Edge neural voice), and a synthetic voice does make mistakes.
+So nothing is trusted by ear alone — the scripts in `tools/` measure every clip:
+
+- **Tones.** `tonecheck.py` tracks the pitch of every single-syllable clip and checks that it draws the
+  right tone (1st stays high, 2nd climbs, 3rd stays low, 4th drops). A clip that fails is recorded again
+  another way — other punctuation, slower, inside a short phrase and cut out, or with another character
+  that has the same reading — until it passes. All 1 190 chart clips and the lesson's one-character
+  clips pass; 6 rare readings the voice cannot say correctly have no sound rather than a wrong one.
+- **Textbook readings.** The voice says 哪 as *něi* (everyday speech); the textbook teaches *nǎ*, so the
+  clips are recorded to say *nǎ*. 谁 is *shéi*, 什么 is *shénme*, as in the book.
+- **Light syllables.** 吗, 呢 and 么 said alone are recorded lower and lighter, like the neutral tone they
+  carry in a sentence, instead of sounding like a 1st or 4th tone.
+- **Right syllable.** `crosscheck.py` compares each chart clip with other characters that share its
+  reading; if they do not sound the same, the clip is flagged and fixed.
+- **Clean playback.** `polish_audio.py` cuts the silence around each clip (they used to end with up to
+  1.3 s of dead air), adds short fades and brings every clip, in every voice, to the same loudness.
 
 ## AI tutor
 
@@ -66,7 +85,7 @@ js/speech.js         speech scoring and pitch tracking
 js/hanzi.js          stroke-order rendering
 data/chars.json      stroke data for the lesson's characters
 audio/               recorded clips (words, sentences, 1 196 pinyin syllables)
-tools/               asset scripts (stroke data, audio, icons)
+tools/               asset scripts (stroke data, audio + its checks, icons)
 ```
 
 ## Rebuilding assets
@@ -74,10 +93,14 @@ tools/               asset scripts (stroke data, audio, icons)
 ```bash
 npm i hanzi-writer hanzi-writer-data pinyin-pro   # anywhere
 node tools/build-assets.mjs path/to/node_modules  # vendor libs + data/chars.json + audio list
-pip install edge-tts pypinyin
-python tools/gen_audio.py                         # audio/ (keeps existing files)
+pip install edge-tts pypinyin numpy                # ffmpeg must be on the PATH
+python tools/gen_audio.py                         # audio/: records what is missing, re-checks the rest
+python tools/tonecheck.py                         # tone table for the chart clips (exit code 1 on a failure)
+python tools/crosscheck.py                        # syllable check for the chart clips
 python tools/make_icons.py
 ```
+
+After re-recording clips, bump `VERSION` in `sw.js` so installed copies fetch the new audio.
 
 ## Credits
 

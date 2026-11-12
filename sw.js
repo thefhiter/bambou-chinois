@@ -1,5 +1,5 @@
 // Offline support: the app shell is cached on install, audio clips as they are played.
-const VERSION = 'bambou-v1';
+const VERSION = 'bambou-v2';   // bump when audio clips are re-recorded: clips are served cache-first
 const SHELL = [
   './', 'index.html', 'css/app.css', 'manifest.webmanifest', 'icons/icon-192.png',
   'vendor/hanzi-writer.min.js', 'vendor/pinyin-pro.js', 'data/chars.json', 'audio/index.json',

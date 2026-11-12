@@ -494,7 +494,7 @@ export function dialogue(root) {
         if (ok === false && running) ok = await speakLine(i);
         if (ok === null) { running = false; break; }
       } else await play(i);
-      await new Promise(r => setTimeout(r, 350));
+      await new Promise(r => setTimeout(r, 600));   // a breath between two speakers
     }
     const finished = running;
     running = false;
