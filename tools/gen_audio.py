@@ -22,8 +22,13 @@ import tonecheck
 from polish_audio import polish, cut_first, emphasise_onset, emphasise_buzz
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-VOICE = 'zh-CN-XiaoxiaoNeural'
-RECIPE = 'v7'   # bump to record every lesson clip again
+VOICE = 'zh-CN-XiaoxiaoNeural'          # pinyin chart: every clip of this voice is tone-checked
+# Lesson words and sentences. Chosen by ear by the learners (voice-test page, 2026-11-12): it says
+# h as a clear "kh" (好 = khao) and r close to French "j" (人 = jen). Its pitch is too low for
+# tonecheck.py to follow, so its clips are not tone-checked or retouched: they are used as recorded.
+LESSON_VOICE = 'zh-CN-YunjianNeural'
+LESSON_RATE = -10
+RECIPE = 'v8'   # bump to record every lesson clip again
 SINGLE_RATE = -30   # one-syllable lesson words are said slower than phrases (-18): they are very short
 
 # What is sent to the voice when it would misread the real text. The app still shows the real text.
@@ -185,15 +190,17 @@ async def main():
     async def lesson_clip(c):
         dest = os.path.join(wdir, c['id'] + '.mp3')
         text = ''.join(SAY.get(ch, ch) for ch in c['text'])
-        sig = signature(text, c.get('voice') or VOICE, RECIPE)
+        voice = c.get('voice') or LESSON_VOICE
+        sig = signature(text, voice, RECIPE)
         if os.path.exists(dest) and made.get('w/' + c['id']) == sig:
             return True
         chars = han(c['text'])
-        single = len(chars) == 1 and not c.get('voice')
-        rate = SINGLE_RATE if single else -18
-        fx = onset_fx(chars[0]) if chars and c['text'].startswith(chars[0]) else None
+        checked = voice in tonecheck.VOICE_REF        # only a voice the tone check can follow is retouched
+        single = len(chars) == 1 and checked
+        rate = SINGLE_RATE if single else LESSON_RATE if voice == LESSON_VOICE else -18
+        fx = onset_fx(chars[0]) if checked and chars and c['text'].startswith(chars[0]) else None
         async with studio.net:
-            if not await tts(text, dest, c.get('voice'), rate):
+            if not await tts(text, dest, voice, rate):
                 return False
         if fx:
             fx[0](dest, *fx[1:])

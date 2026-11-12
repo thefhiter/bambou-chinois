@@ -57,6 +57,11 @@ So nothing is trusted by ear alone — the scripts in `tools/` measure every cli
 - **Clean playback.** `polish_audio.py` cuts the silence around each clip (they used to end with up to
   1.3 s of dead air), adds short fades and brings every clip, in every voice, to the same loudness.
 
+**Two voices.** Lesson words and sentences use a male voice the learners picked by ear because it
+says *h* as a clear "kh" (好 = *khao*) and *r* close to the French "j" (人 = *jen*). Its pitch is too
+low for `tonecheck.py` to follow, so those clips are used as recorded (trimmed and levelled only).
+The pinyin chart keeps the female voice, where every clip is tone-checked.
+
 ## AI tutor
 
 Settings → *AI tutor* → paste an Anthropic API key. The key is stored only in that browser and
