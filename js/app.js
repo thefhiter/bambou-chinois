@@ -125,5 +125,9 @@ document.addEventListener('click', e => {       // any Chinese text marked data-
 window.addEventListener('hashchange', route);
 route();
 if ('serviceWorker' in navigator && location.protocol === 'https:' || location.hostname === 'localhost') {
-  navigator.serviceWorker?.register('sw.js').catch(() => {});
+  navigator.serviceWorker?.register('sw.js', { updateViaCache: 'none' }).then(r => r.update()).catch(() => {});
+  // a new version took over: load it now instead of running the old code until the next visit
+  const had = !!navigator.serviceWorker?.controller;
+  let reloaded = false;
+  navigator.serviceWorker?.addEventListener('controllerchange', () => { if (had && !reloaded) { reloaded = true; location.reload(); } });
 }

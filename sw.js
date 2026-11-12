@@ -1,5 +1,5 @@
 // Offline support: the app shell is cached on install, audio clips as they are played.
-const VERSION = 'bambou-v6';   // bump when audio clips are re-recorded: clips are served cache-first
+const VERSION = 'bambou-v7';   // bump when audio clips are re-recorded: clips are served cache-first
 const SHELL = [
   './', 'index.html', 'css/app.css', 'manifest.webmanifest', 'icons/icon-192.png',
   'vendor/hanzi-writer.min.js', 'vendor/pinyin-pro.js', 'data/chars.json', 'audio/index.json',
@@ -33,7 +33,8 @@ self.addEventListener('fetch', e => {
     const hit = await cache.match(e.request, { ignoreSearch: !isAudio });   // audio URLs carry their version
     if (hit && (isAudio || isFont)) return hit;                  // never changes: cache first
     try {
-      const res = await fetch(e.request);
+      // always ask the server whether the file changed: an updated app must never run old code
+      const res = await fetch(e.request, sameOrigin && !isAudio ? { cache: 'no-cache' } : undefined);
       if (res.ok && res.status === 200) cache.put(e.request, res.clone());   // skip partial (206) responses
       return res;
     } catch (err) {
