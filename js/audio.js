@@ -3,8 +3,10 @@ import { audioList } from './data.js';
 import { sylKey } from './pinyin-table.js';
 
 let manifest = { words: [], tones: {}, chars: {} };
-let ready = fetch('audio/index.json').then(r => r.ok ? r.json() : manifest).then(m => { manifest = m; }).catch(() => {});
+let ready = fetch('audio/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : manifest).then(m => { manifest = m; }).catch(() => {});
 export const audioReady = () => ready;
+// re-recorded clips get a new address, so no cache can serve an old take
+const ver = () => manifest.v ? `?v=${manifest.v}` : '';
 export const tonesOf = syl => manifest.tones[sylKey(syl)] || '';
 export const exampleChar = (syl, tone) => manifest.chars[sylKey(syl) + tone] || '';
 
@@ -59,14 +61,14 @@ export async function say(text, { rate = 1, id } = {}) {
   await ready;
   const clip = id || byText[text] || byText[norm(text)];
   if (clip && manifest.words.includes(clip)) {
-    if (await playUrl(`audio/w/${clip}.mp3`, rate)) return true;
+    if (await playUrl(`audio/w/${clip}.mp3${ver()}`, rate)) return true;
   }
   return tts(text, rate);
 }
 export async function playSyl(syl, tone, rate = 1) {
   await ready;
   const k = sylKey(syl);
-  if (tonesOf(k).includes(String(tone))) return playUrl(`audio/py/${k}${tone}.mp3`, rate);
+  if (tonesOf(k).includes(String(tone))) return playUrl(`audio/py/${k}${tone}.mp3${ver()}`, rate);
   return false;
 }
 export function stopAudio() { token++; el.pause(); window.speechSynthesis && speechSynthesis.cancel(); }

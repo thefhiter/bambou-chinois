@@ -1,5 +1,5 @@
 // Offline support: the app shell is cached on install, audio clips as they are played.
-const VERSION = 'bambou-v3';   // bump when audio clips are re-recorded: clips are served cache-first
+const VERSION = 'bambou-v5';   // bump when audio clips are re-recorded: clips are served cache-first
 const SHELL = [
   './', 'index.html', 'css/app.css', 'manifest.webmanifest', 'icons/icon-192.png',
   'vendor/hanzi-writer.min.js', 'vendor/pinyin-pro.js', 'data/chars.json', 'audio/index.json',
@@ -12,8 +12,8 @@ self.addEventListener('install', e => {
     await c.addAll(SHELL);
     // word and sentence clips are small: fetch them all so lessons work offline
     try {
-      const { words } = await (await fetch('audio/index.json')).json();
-      await Promise.allSettled(words.map(w => c.add(`audio/w/${w}.mp3`)));
+      const { words, v } = await (await fetch('audio/index.json', { cache: 'no-cache' })).json();
+      await Promise.allSettled(words.map(w => c.add(`audio/w/${w}.mp3${v ? '?v=' + v : ''}`)));
     } catch { /* offline install */ }
     self.skipWaiting();
   })());
@@ -30,7 +30,7 @@ self.addEventListener('fetch', e => {
   const isAudio = sameOrigin && url.pathname.includes('/audio/') && url.pathname.endsWith('.mp3');
   e.respondWith((async () => {
     const cache = await caches.open(VERSION);
-    const hit = await cache.match(e.request, { ignoreSearch: true });
+    const hit = await cache.match(e.request, { ignoreSearch: !isAudio });   // audio URLs carry their version
     if (hit && (isAudio || isFont)) return hit;                  // never changes: cache first
     try {
       const res = await fetch(e.request);

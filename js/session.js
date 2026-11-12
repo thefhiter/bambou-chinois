@@ -1,6 +1,6 @@
 // The lesson / review engine: a queue of small exercises with instant feedback.
 // See → Hear → Trace → Recognise → Build → Say → Write from memory.
-import { CHARS, WORDS, SENTENCES, CHAR, WORD, SENT, NOTE, charAudio } from './data.js';
+import { CHARS, WORDS, SENTENCES, CHAR, WORD, SENT, NOTE, charAudio, SOUNDS_LIKE } from './data.js';
 import { $, $$, esc, icon, on, shuffle, sample } from './ui.js';
 import { t, L } from './i18n.js';
 import { state, grade, learn, addXp, save, box } from './store.js';
@@ -195,6 +195,7 @@ export function runSession(root, { steps, title, learnKeys = [], onDone }) {
         body.innerHTML = `${tag}
           <div class="writer-card"><div class="grid-bg" id="w-target"></div></div>
           <div class="py big" dir="ltr">${esc(it.py)}</div>
+          ${SOUNDS_LIKE[it.py] ? `<p class="says">${esc(L(SOUNDS_LIKE[it.py]))}</p>` : ''}
           <h2 class="meaning">${esc(L(it.m))}</h2>
           ${soundBtns()}
           <p class="hint">${icon('bulb')}<span>${esc(L(it.hint))}</span></p>
@@ -210,6 +211,7 @@ export function runSession(root, { steps, title, learnKeys = [], onDone }) {
         body.innerHTML = `${tag}
           <div class="hz hero ${k === 's' ? 'sent' : ''}" lang="zh-Hans" dir="ltr">${esc(it.hz)}</div>
           <div class="py big" dir="ltr">${esc(it.py)}</div>
+          ${SOUNDS_LIKE[it.py] ? `<p class="says">${esc(L(SOUNDS_LIKE[it.py]))}</p>` : ''}
           <h2 class="meaning">${esc(L(it.m))}</h2>
           ${soundBtns()}
           ${parts ? `<ul class="parts">${parts}</ul>` : ''}`;

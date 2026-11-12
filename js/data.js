@@ -217,6 +217,14 @@ export const GRAMMAR = [
     ok: ['请问,你是哪国人?'], ko: [] },
 ];
 
+// How a word really sounds when its pinyin letters mislead a French or Arabic reader
+// (h is the throat sound of خ, r is close to French « j »). Shown under the pinyin on new cards.
+export const SOUNDS_LIKE = {
+  'hǎo': T('se dit « khao »', 'تُنطق «خاو»', 'say "khao"'),
+  'hǎo rén': T('se dit « khao jen »', 'تُنطق «خاو جَن»', 'say "khao jen"'),
+  'rén': T('se dit « jen » (j de « je »)', 'تُنطق «جَن» (ج الفرنسية j)', 'say "jen" (French j)'),
+};
+
 /* ---------- Pinyin of the lesson (语音概要) ---------- */
 export const INITIALS = [
   { s: 'b', ex: 'bu4', h: T('Non aspiré : comme le « p » français, sans souffle.', 'غير مهموس: مثل «p» الفرنسية دون نفخة هواء.', 'Unaspirated: like the "p" in "spy", no puff of air.') },

@@ -55,9 +55,10 @@ def polish(path):
     return True
 
 
-def emphasise_onset(path, gain_db=8.0):
-    """Make the breathy consonant that opens a clip louder (pinyin h = the "kh" of Arabic خ, which the
-    voice says very softly). Only the noise before the vowel is raised. False if there is no such noise."""
+def emphasise_onset(path, gain_db=8.0, stretch=1.0):
+    """Make the noisy consonant that opens a clip louder and longer. Used for pinyin h (the "kh" of
+    Arabic kha) and r (close to French "j"), which the voice says very softly. Only the noise before
+    the vowel is touched. False if the clip does not open with such a noise."""
     x = _decode(path)
     win, hop, nfft = int(0.02 * SR), int(0.005 * SR), 1024
     n = 1 + (len(x) - win) // hop
@@ -77,15 +78,65 @@ def emphasise_onset(path, gain_db=8.0):
     if not voiced or (voiced[0] - start) * hop < 0.04 * SR:
         return False
     a, b = start * hop, voiced[0] * hop           # the consonant's noise: samples a..b
-    gain = np.ones(len(x), dtype=np.float32)
+    noise = x[a:b]
+    if stretch > 1.0:                             # lengthen it: overlap short grains read more slowly
+        grain, step = int(0.02 * SR), int(0.005 * SR)
+        length = int(len(noise) * stretch)
+        out = np.zeros(length + grain, dtype=np.float32)
+        norm = np.zeros(length + grain, dtype=np.float32)
+        w = np.hanning(grain).astype(np.float32)
+        for pos in range(0, length, step):
+            src = min(int(pos / stretch), max(0, len(noise) - grain))
+            piece = noise[src:src + grain]
+            out[pos:pos + len(piece)] += piece * w[:len(piece)]
+            norm[pos:pos + len(piece)] += w[:len(piece)] ** 2
+        noise = (out / np.sqrt(np.maximum(norm, 1e-3)))[:length]   # grains of noise add up in power
     g = 10 ** (gain_db / 20)
-    ramp = int(0.02 * SR)
-    a0 = max(0, a - ramp // 2)
-    gain[a0:b] = g
-    gain[a0:a0 + ramp // 2] = np.linspace(1, g, ramp // 2)
-    end = min(len(x), b + ramp)
-    gain[b:end] = np.linspace(g, 1, end - b)      # glide back to normal as the vowel starts
-    y = x * gain
+    ramp = min(len(noise), int(0.01 * SR))
+    noise = noise * g
+    noise[:ramp] *= np.linspace(1 / g, 1, ramp)
+    tail = x[b:].copy()                           # glide back to normal as the vowel starts
+    glide = min(len(tail), int(0.02 * SR))
+    tail[:glide] *= np.linspace(g, 1, glide)
+    y = np.concatenate([x[:a], noise, tail]).astype(np.float32)
+    top = np.max(np.abs(y))
+    if top > 0.98:
+        y *= 0.98 / top
+    _encode(y, path)
+    return True
+
+
+def emphasise_buzz(path, gain_db=14.0):
+    """Bring out the hiss of a voiced consonant that opens a clip (pinyin r, close to French "j"):
+    the part of the sound above 1.8 kHz is raised during the consonant, before the vowel opens.
+    False if no such consonant is found."""
+    x = _decode(path)
+    hop = int(0.005 * SR)
+    n = len(x) // hop
+    if n < 30:
+        return False
+    env = np.sqrt(np.mean(x[:n * hop].reshape(n, hop) ** 2, axis=1))
+    peak = env.max()
+    heard = np.where(env > 0.03 * peak)[0]
+    if len(heard) == 0:
+        return False
+    start = heard[0]
+    vowel = [i for i in range(start, n - 2) if env[i] > 0.45 * peak and env[i + 1] > 0.45 * peak]
+    if not vowel:
+        return False
+    length = min(max(vowel[0] - start, 0), int(0.14 * SR / hop))
+    if length * hop < 0.04 * SR:
+        return False
+    a, b = start * hop, (start + length) * hop
+    spec = np.fft.rfft(x)
+    freq = np.fft.rfftfreq(len(x), 1 / SR)
+    high = np.fft.irfft(spec * np.clip((freq - 1500) / 600, 0, 1), len(x)).astype(np.float32)
+    shape = np.zeros(len(x), dtype=np.float32)
+    ramp = int(0.015 * SR)
+    shape[a:b] = 1
+    shape[max(0, a - ramp):a] = np.linspace(0, 1, a - max(0, a - ramp))
+    shape[b:b + ramp] = np.linspace(1, 0, len(shape[b:b + ramp]))
+    y = x + (10 ** (gain_db / 20) - 1) * high * shape
     top = np.max(np.abs(y))
     if top > 0.98:
         y *= 0.98 / top
