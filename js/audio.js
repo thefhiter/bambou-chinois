@@ -17,6 +17,8 @@ for (const k of Object.keys(byText)) byText[norm(k)] = byText[k];
 
 const el = new Audio();
 let token = 0;
+// Resolves true when the clip played to the end, null when it was cut short (another clip started,
+// or the browser refused to start it), false only when the file itself could not be played.
 function playUrl(url, rate = 1) {
   const my = ++token;
   window.speechSynthesis && speechSynthesis.cancel();
@@ -35,9 +37,9 @@ function playUrl(url, rate = 1) {
     el.src = url;
     el.playbackRate = rate;
     el.preservesPitch = true;
-    el.play().catch(() => done(false));
+    el.play().catch(() => done(el.error ? false : null));
     // safety net: another clip took over, or the browser never fired "ended"
-    guard = setInterval(() => { if (my !== token || el.error) done(false); else if (el.ended) done(true); }, 200);
+    guard = setInterval(() => { if (my !== token) done(null); else if (el.error) done(false); else if (el.ended) done(true); }, 200);
   });
 }
 
@@ -48,7 +50,8 @@ function tts(text, rate = 1) {
     u.lang = 'zh-CN';
     u.rate = 0.8 * rate;
     const v = speechSynthesis.getVoices().find(v => /^zh([-_]CN)?/i.test(v.lang)) || speechSynthesis.getVoices().find(v => /^zh/i.test(v.lang));
-    if (v) u.voice = v;
+    if (!v) return res(false);   // no Chinese voice on this device: silence is better than a wrong reading
+    u.voice = v;
     u.onend = () => res(true);
     u.onerror = () => res(false);
     speechSynthesis.cancel();
@@ -61,14 +64,17 @@ export async function say(text, { rate = 1, id } = {}) {
   await ready;
   const clip = id || byText[text] || byText[norm(text)];
   if (clip && manifest.words.includes(clip)) {
-    if (await playUrl(`audio/w/${clip}.mp3${ver()}`, rate)) return true;
+    // the device's voice is only a stand-in for a clip that cannot be played at all:
+    // a clip cut short by the next one must not be "repeated" by another voice
+    const played = await playUrl(`audio/w/${clip}.mp3${ver()}`, rate);
+    if (played !== false) return played === true;
   }
   return tts(text, rate);
 }
 export async function playSyl(syl, tone, rate = 1) {
   await ready;
   const k = sylKey(syl);
-  if (tonesOf(k).includes(String(tone))) return playUrl(`audio/py/${k}${tone}.mp3${ver()}`, rate);
+  if (tonesOf(k).includes(String(tone))) return (await playUrl(`audio/py/${k}${tone}.mp3${ver()}`, rate)) !== false;
   return false;
 }
 export function stopAudio() { token++; el.pause(); window.speechSynthesis && speechSynthesis.cancel(); }
@@ -120,4 +126,4 @@ export async function record() {
     }),
   };
 }
-export const playBlob = url => playUrl(url);
+export const playBlob = async url => (await playUrl(url)) === true;
