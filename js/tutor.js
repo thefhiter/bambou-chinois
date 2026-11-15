@@ -1,5 +1,8 @@
-// AI tutor: Claude through the Anthropic Messages API when a key is set (called directly from the
-// browser), otherwise a built-in coach that answers from the lesson content.
+// AI tutor. Three ways to answer, best first:
+//   - Grok (xAI) through Puter.js: free for everyone, no API key. Each learner signs in once to a free
+//     Puter account (Google / Microsoft / Apple) and uses that account's free monthly allowance.
+//   - Claude through the Anthropic Messages API, for someone who pastes their own key in Settings.
+//   - A built-in coach that answers from the lesson content: no account, works offline.
 import { CHARS, WORDS, SENTENCES, GRAMMAR, DIALOGUE, HELLO, SANDHI } from './data.js';
 import { $, $$, esc, icon, on, sample, toast } from './ui.js';
 import { t, L } from './i18n.js';
@@ -25,6 +28,53 @@ GRAMMAR POINTS: ${GRAMMAR.map(g => `${g.title.fr}: ${g.body.fr}`).join(' || ')}
 PRONUNCIATION: ${SANDHI.map(r => `${r.title.fr}: ${r.body.fr}`).join(' || ')} Sounds for French/Arabic speakers: h is the Arabic خ (好 = khao), r is close to the French j (人 = jen), ian sounds "yen", an/en keep a clear n (not French nasals), e is a back "eu" (not é), i after z c s zh ch sh r is a buzz (not "i"), k is an aspirated k (not خ).
 
 What you do: explain a word, a character (its components and a memory trick) or a rule; correct the student's Chinese sentences gently (show the corrected sentence and one short reason); run mini-quizzes one question at a time and wait for the answer; role-play the dialogue (you play one person, they play the other, one line at a time). When they make a mistake, praise what was right first. If asked about something unrelated to learning Chinese or school, bring them kindly back to the lesson.`;
+
+/* ---------- Grok through Puter.js (free, no key) ---------- */
+export const GROK_MODELS = [['x-ai/grok-4-1-fast-non-reasoning', 'grokFast'], ['x-ai/grok-4.7', 'grokStrong']];
+let puterLoad = null;
+// Loads https://js.puter.com/v2/ once, only when the tutor is used.
+export function loadPuter() {
+  if (window.puter) return Promise.resolve(window.puter);
+  if (!puterLoad) puterLoad = new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = 'https://js.puter.com/v2/';
+    s.onload = () => { try { window.puter.quiet = true; } catch { /* older SDK */ } res(window.puter); };
+    s.onerror = () => { puterLoad = null; rej(new Error('puter')); };
+    document.head.appendChild(s);
+  });
+  return puterLoad;
+}
+export const grokSignedIn = () => { try { return !!window.puter?.auth?.isSignedIn(); } catch { return false; } };
+// Must run inside a click: Puter opens its sign-in window as a popup.
+export async function grokSignIn() {
+  const puter = window.puter || await loadPuter();
+  await puter.auth.signIn();
+  return grokSignedIn();
+}
+export async function grokSignOut() { try { await window.puter?.auth?.signOut(); } catch { /* already out */ } }
+
+async function askGrok(history, onDelta) {
+  const puter = await loadPuter();
+  if (!grokSignedIn()) throw Object.assign(new Error('signin'), { status: 'signin' });
+  const messages = [{ role: 'system', content: systemPrompt() }, ...history.map(m => ({ role: m.role, content: m.text }))];
+  let res;
+  try { res = await puter.ai.chat(messages, { model: state.ai.grokModel || GROK_MODELS[0][0], stream: true }); }
+  catch (e) { throw grokError(e); }
+  let text = '';
+  try {
+    for await (const part of res) {
+      if (part?.type === 'error') throw grokError(part);
+      if (part?.text) { text += part.text; onDelta(text); }
+    }
+  } catch (e) { if (!text) throw grokError(e); }   // a stream cut near the end keeps what arrived
+  return text;
+}
+function grokError(e) {
+  const raw = (e && (e.message || e.error?.message || e.error || e.code)) || e;
+  const msg = typeof raw === 'string' ? raw : JSON.stringify(raw);
+  const quota = /insufficient|funding|funds|quota|allowance|402/i.test(msg + ' ' + (e?.code || '') + ' ' + (e?.status || ''));
+  return Object.assign(new Error(msg), { status: quota ? 'quota' : e?.status === 401 ? 'signin' : 'grok' });
+}
 
 /* ---------- Claude (Anthropic Messages API, streaming) ---------- */
 async function askClaude(history, onDelta, signal) {
@@ -113,11 +163,13 @@ function coach(msg) {
 /* ---------- chat screen ---------- */
 const fmt = text => esc(text)
   .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+  .replace(/(^|\n)_(.+?)_(?=\n|$)/g, '$1<i class="muted">$2</i>')
   .replace(/([一-鿿][一-鿿，。？！、,?!]*)/g, m => `<button class="say" data-say="${m}" lang="zh-Hans" dir="ltr">${m}</button>`)
   .replace(/\n/g, '<br>');
 
 export function tutor(root) {
-  const hasKey = () => !!state.ai.key;
+  const useClaude = () => state.ai.provider === 'anthropic' && !!state.ai.key;
+  const useGrok = () => state.ai.provider !== 'anthropic';
   let busy = false, ctrl = null;
   root.innerHTML = `
     <div class="chat">
@@ -126,6 +178,7 @@ export function tutor(root) {
         <div class="grow"><h1>${esc(t('tutorName'))}</h1><p class="muted" id="tu-mode"></p></div>
         <button class="icon-btn" id="tu-clear" aria-label="${esc(t('clearChat'))}">${icon('trash')}</button>
       </header>
+      <div id="tu-gate"></div>
       <div class="msgs" id="tu-msgs" aria-live="polite"></div>
       <div class="chips-row" id="tu-chips">
         ${['Explain', 'Quiz', 'Role', 'Correct', 'Trick'].map(k => `<button class="pill" data-q="${esc(t('chip' + k + 'Q'))}">${esc(t('chip' + k))}</button>`).join('')}
@@ -138,7 +191,18 @@ export function tutor(root) {
       </form>
     </div>`;
   const box = $('#tu-msgs', root), input = $('#tu-in', root);
-  const mode = () => { $('#tu-mode', root).innerHTML = hasKey() ? esc(t('tutorOnline')) : `${esc(t('tutorOffline'))} <a href="#/settings">${esc(t('tutorAddKey'))}</a>`; };
+  const gate = $('#tu-gate', root);
+  const mode = () => {
+    const grokOn = useGrok() && grokSignedIn();
+    $('#tu-mode', root).innerHTML = useClaude() ? esc(t('tutorOnline'))
+      : grokOn ? esc(t('tutorGrok', { m: t(GROK_MODELS.find(m => m[0] === state.ai.grokModel)?.[1] || 'grokFast') }))
+      : esc(t('tutorOffline'));
+    // the sign-in card: only for Grok, only while signed out
+    gate.innerHTML = useGrok() && !grokOn ? `<section class="card grok-gate">
+        <h2>${icon('spark')} ${esc(t('grokGateTitle'))}</h2><p>${esc(t('grokGateText'))}</p>
+        <div class="row wrap"><button class="btn primary" id="tu-signin" ${window.puter ? '' : 'disabled'}>${icon('user')} ${esc(t(window.puter ? 'grokSignIn' : 'grokLoading'))}</button></div>
+        <p class="muted small">${esc(t('grokGateNote'))}</p></section>` : '';
+  };
   const bubble = (role, html) => { const d = document.createElement('div'); d.className = 'msg ' + role; d.innerHTML = html; box.appendChild(d); box.scrollTop = box.scrollHeight; return d; };
   const redraw = () => {
     box.innerHTML = '';
@@ -146,6 +210,14 @@ export function tutor(root) {
     state.chat.forEach(m => bubble(m.role, fmt(m.text)));
   };
   mode(); redraw();
+  if (useGrok() && navigator.onLine !== false) loadPuter().then(() => { if (root.isConnected) mode(); }).catch(() => {
+    if (root.isConnected) gate.innerHTML = `<p class="cs-msg">${esc(t('grokNoLoad'))}</p>`;
+  });
+  on(root, 'click', '#tu-signin', async el => {
+    el.disabled = true;
+    try { await grokSignIn(); } catch (e) { toast(t(/popup/.test(e?.error || e?.message || '') ? 'grokPopup' : 'grokSignInFail')); }
+    if (root.isConnected) { mode(); if (grokSignedIn()) toast(t('grokReady')); }
+  });
 
   async function send(text) {
     text = text.trim();
@@ -156,9 +228,17 @@ export function tutor(root) {
     const out = bubble('assistant', '<span class="typing"><i></i><i></i><i></i></span>');
     let reply;
     try {
-      if (hasKey()) {
+      const show = part => { out.innerHTML = fmt(part); box.scrollTop = box.scrollHeight; };
+      if (useClaude()) {
         ctrl = new AbortController();
-        reply = await askClaude(state.chat.slice(-16), part => { out.innerHTML = fmt(part); box.scrollTop = box.scrollHeight; }, ctrl.signal);
+        reply = await askClaude(state.chat.slice(-16), show, ctrl.signal);
+      } else if (useGrok() && grokSignedIn()) {
+        try { reply = await askGrok(state.chat.slice(-16), show); }
+        catch (e) {
+          // Grok cannot answer (free allowance used up, network…): the lesson coach answers instead
+          if (e.status === 'signin') mode();
+          reply = `_${t(e.status === 'quota' ? 'grokQuota' : 'grokDown')}_\n\n` + coach(text);
+        }
       } else {
         await new Promise(r => setTimeout(r, 350));
         reply = coach(text);

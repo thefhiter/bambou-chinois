@@ -10,8 +10,10 @@ lessons 1 and 2 of the class, lesson 2 of the Tunisian 3rd-year secondary Chines
 ![Stroke steps, tone trainer, pinyin chart, dialogue, Arabic dark mode](docs/screenshots/phone-tools.png)
 ![Character studio on desktop](docs/screenshots/desktop-studio.png)
 
-## What's new — lessons 1 and 2 of the course, every sound, voice speed
+## What's new — lessons 1 and 2 of the course, every sound, voice speed, free Grok tutor
 
+- **Free AI tutor on Grok** — no API key for anyone: sign in once with Google, Microsoft or Apple (free Puter
+  account) and 竹老师 answers with Grok. See *AI tutor* below.
 - **6 new lessons and a dialogue** from what the class studied: *Bonjour !* (你好 你好吗 很),
   *Nous, vous, eux* (他 们 我们 你们 他们 她们), *Aller, aimer* (去 喜欢 爱 对 真),
   *Ravi de te connaître* (您 高兴 认识), *都, 不, 很 : la bonne place* (the six sentences 我很不高兴 …
@@ -49,7 +51,7 @@ Every character and word goes through the same six moves:
 - **Pinyin lab** — the 4 tones, a tone trainer that draws the pitch of your voice, an ear game, every consonant and vowel with a word to hear, tone changes (bú shì, half third tone, neutral tone), and the full pinyin chart with sound for every syllable.
 - **Dialogues** — « 你好! » and « 你是哪国人? »: listen, repeat each line, or role-play as 萨米, 小美 or 玛丽.
 - **Voice speed** — 0.5× to 1.5× for every clip, from any screen (the gauge button), pitch kept.
-- **AI tutor (竹老师)** — a built-in coach that answers from the lesson offline, or Claude when an Anthropic API key is added in Settings.
+- **AI tutor (竹老师)** — **Grok, free for everyone, no API key**: sign in once with Google, Microsoft or Apple. Before that (or offline) a built-in coach answers from the lessons.
 
 ## Microphone notes
 
@@ -89,9 +91,22 @@ The pinyin chart keeps the female voice, where every clip is tone-checked.
 
 ## AI tutor
 
-Settings → *AI tutor* → paste an Anthropic API key. The key is stored only in that browser and
-sent only to `api.anthropic.com`. *Copy a link for my friends* creates a link that turns the tutor
-on for whoever opens it — it contains the key, so share it only with people you trust.
+The tutor runs on **Grok (xAI)** through [Puter.js](https://developer.puter.com/), free and with no API key:
+
+1. Open *Tuteur IA* and tap **Se connecter (gratuit)**.
+2. Puter's window asks to sign in once with Google, Microsoft or Apple (a free Puter account).
+3. From then on Grok answers, with the lesson's vocabulary, grammar and pronunciation notes as its brief.
+
+Each account has a free monthly allowance (Puter's "user-pays" model: the site owner pays nothing,
+each learner uses their own free credit). In Settings you can pick **Grok 4.1 Fast** (default: quick,
+the free credit lasts long) or **Grok 4.7** (the strongest, uses the credit faster). When the credit runs
+out, or before signing in, or offline, the built-in coach answers instead. Messages to the tutor go
+through Puter and xAI; nothing else of the learner's progress leaves the device.
+
+![The tutor before signing in, and the Grok settings](docs/screenshots/phone-tutor.png)
+
+Optional: Settings → *Claude (ma clé API)* → paste an Anthropic API key to use Claude instead. That key
+is stored only in that browser and sent only to `api.anthropic.com`.
 
 ## Run locally
 
@@ -110,7 +125,7 @@ js/data.js           lesson content (fr / ar / en), the sound chart and tone rul
 js/pinyin-table.js   the three pinyin charts
 js/session.js        lesson + review engine
 js/views.js          home, characters, pinyin lab, review, dialogue
-js/tutor.js          AI tutor + offline coach
+js/tutor.js          AI tutor: Grok via Puter.js (free), Claude (own key), offline coach
 js/speech.js         speech scoring and pitch tracking
 js/hanzi.js          stroke-order rendering
 data/chars.json      stroke data for the lesson's characters

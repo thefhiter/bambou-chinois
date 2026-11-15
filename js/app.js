@@ -6,7 +6,7 @@ import { say, stopAudio, releaseMic, audioCtx, SPEEDS, getSpeed, setSpeed, fmtSp
 import { stopListening } from './speech.js';
 import { loadChars } from './hanzi.js';
 import * as V from './views.js';
-import { tutor, testKey } from './tutor.js';
+import { tutor, testKey, GROK_MODELS, loadPuter, grokSignedIn, grokSignIn, grokSignOut } from './tutor.js';
 
 const nav = $('#nav');
 const NAV = [['home', 'navHome', 'home'], ['chars', 'navChars', 'brush'], ['pinyin', 'navPinyin', 'wave'], ['review', 'navReview', 'repeat'], ['tutor', 'navTutor', 'spark']];
@@ -111,7 +111,14 @@ function settings(root) {
     <section class="card" id="set-speed"><h2>${icon('gauge')} ${esc(t('speedTitle'))}</h2><p class="muted">${esc(t('speedSub'))}</p>${speedControls()}</section>
     <section class="card"><h2>${esc(t('theme'))}</h2>${seg('theme', [['auto', t('themeAuto')], ['light', t('themeLight')], ['dark', t('themeDark')]], state.theme)}
       ${sw('o-py', t('optPinyin'), state.showPinyin)}${sw('o-sp', t('optSpeak'), state.speak)}</section>
-    <section class="card"><h2>${icon('spark')} ${esc(t('aiTitle'))}</h2><p class="muted">${esc(t('aiSub'))}</p>
+    <section class="card" id="set-ai"><h2>${icon('spark')} ${esc(t('aiTitle'))}</h2>
+      ${seg('prov', [['grok', t('provGrok')], ['anthropic', t('provClaude')]], state.ai.provider === 'anthropic' ? 'anthropic' : 'grok')}
+      ${state.ai.provider !== 'anthropic' ? `<p class="muted">${esc(t('grokGateText'))}</p>
+      <label class="field"><span>${esc(t('grokModel'))}</span><select id="grok-model">${GROK_MODELS.map(([v, k]) => `<option value="${v}" ${v === state.ai.grokModel ? 'selected' : ''}>${esc(t(k + 'D'))}</option>`).join('')}</select></label>
+      <div class="row wrap"><span class="grow" id="grok-status" role="status">${esc(t('grokLoading'))}</span>
+        <button class="btn primary" id="grok-in" hidden>${icon('user')} ${esc(t('grokSignIn'))}</button><button class="btn ghost" id="grok-out" hidden>${esc(t('grokSignOut'))}</button></div>
+      <p class="muted small">${esc(t('grokGateNote'))}</p></section>
+    <section class="card" hidden><h2>${esc(t('provClaude'))}</h2>` : `<p class="muted">${esc(t('aiSub'))}</p>`}
       <label class="field"><span>${esc(t('aiKey'))}</span><input id="ai-key" type="password" autocomplete="off" spellcheck="false" dir="ltr" placeholder="sk-ant-…" value="${esc(state.ai.key)}"></label>
       <label class="field"><span>${esc(t('aiModel'))}</span><select id="ai-model">${MODELS.map(([v, l]) => `<option value="${v}" ${v === state.ai.model ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
       <div class="row wrap"><button class="btn primary" id="ai-save">${esc(t('save'))}</button><button class="btn ghost" id="ai-test">${esc(t('aiTest'))}</button>
@@ -125,6 +132,16 @@ function settings(root) {
   wireSpeed($('#set-speed', root));
   $('#o-py', root).onchange = e => { state.showPinyin = e.target.checked; save(); };
   $('#o-sp', root).onchange = e => { state.speak = e.target.checked; save(); };
+  on(root, 'click', '[data-prov]', el => { state.ai.provider = el.dataset.prov; save(); route(); });
+  const gm = $('#grok-model', root);
+  if (gm) {
+    gm.onchange = () => { state.ai.grokModel = gm.value; save(); toast(t('save') + ' ✓'); };
+    const status = $('#grok-status', root), bin = $('#grok-in', root), bout = $('#grok-out', root);
+    const show = () => { const on = grokSignedIn(); status.textContent = t(on ? 'grokStatusIn' : 'grokStatusOut'); bin.hidden = on; bout.hidden = !on; };
+    loadPuter().then(() => { if (root.isConnected) show(); }).catch(() => { status.textContent = t('grokNoLoad'); });
+    bin.onclick = async () => { try { await grokSignIn(); if (grokSignedIn()) toast(t('grokReady')); } catch (e) { toast(t(/popup/.test(e?.error || e?.message || '') ? 'grokPopup' : 'grokSignInFail')); } show(); };
+    bout.onclick = async () => { await grokSignOut(); show(); };
+  }
   const msg = $('#ai-msg', root);
   const store = () => { state.ai.key = $('#ai-key', root).value.trim(); state.ai.model = $('#ai-model', root).value; save(); };
   $('#ai-save', root).onclick = () => { store(); toast(t('save') + ' ✓'); };
@@ -146,7 +163,7 @@ function settings(root) {
 
 /* ---------- boot ---------- */
 if (location.hash.startsWith('#k=')) {       // a classmate shared their AI access
-  try { const o = JSON.parse(atob(location.hash.slice(3))); if (o.k) { state.ai.key = o.k; state.ai.model = o.m || state.ai.model; save(); setTimeout(() => toast(t('aiImported')), 600); } } catch { /* bad link */ }
+  try { const o = JSON.parse(atob(location.hash.slice(3))); if (o.k) { state.ai.key = o.k; state.ai.provider = 'anthropic'; state.ai.model = o.m || state.ai.model; save(); setTimeout(() => toast(t('aiImported')), 600); } } catch { /* bad link */ }
   history.replaceState(null, '', location.pathname + '#/home');
 }
 applyLang(); applyTheme(); loadChars();

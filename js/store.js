@@ -6,7 +6,7 @@ const defaults = () => ({
   xp: 0, streak: 0, lastDay: null, dayXp: {},
   done: {},            // path id -> { stars, at }
   srs: {},             // 'c:你' | 'w:ni' | 's:s_x' -> { box, due, ok, ko }
-  ai: { provider: 'anthropic', key: '', model: 'claude-opus-5-5' },
+  ai: { provider: 'grok', key: '', model: 'claude-opus-5-5', grokModel: 'x-ai/grok-4-1-fast-non-reasoning' },
   chat: [],
 });
 
@@ -14,7 +14,10 @@ function load() {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
     const d = defaults();
-    return raw ? { ...d, ...raw, ai: { ...d.ai, ...(raw.ai || {}) } } : d;
+    const s = raw ? { ...d, ...raw, ai: { ...d.ai, ...(raw.ai || {}) } } : d;
+    // Grok is the free default since 2026-11-15: Claude stays only for someone who pasted a key
+    if (s.ai.provider !== 'grok' && !s.ai.key) s.ai.provider = 'grok';
+    return s;
   } catch { return defaults(); }
 }
 export const state = load();

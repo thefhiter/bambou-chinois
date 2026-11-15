@@ -340,3 +340,11 @@ header.hero, .page-head { padding-inline-end: 132px; }
 .hero .muted .hz { white-space: nowrap; }
 
 ul.sound-grid { list-style: none; margin: 0; padding: 0; }
+
+/* AI tutor: free Grok sign-in card */
+.grok-gate { background: var(--jade-soft); border-color: transparent; margin-bottom: 12px; }
+.grok-gate h2 .ic { color: var(--jade); }
+.msg i.muted { font-style: italic; }
+
+/* the hidden attribute always wins over component display rules */
+[hidden] { display: none !important; }
