@@ -1,6 +1,19 @@
 // Sound: recorded clips (audio/), browser text-to-speech as fallback, small UI sounds, voice recorder.
 import { audioList } from './data.js';
 import { sylKey } from './pinyin-table.js';
+import { state, save } from './store.js';
+
+// Speed of every voice in the app, chosen by the learner (0.5× to 1.5×). The pitch is kept: only the tempo changes.
+export const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5];
+export const getSpeed = () => Math.min(1.5, Math.max(0.5, +state.speed || 1));
+export function setSpeed(x) {
+  state.speed = Math.round(Math.min(1.5, Math.max(0.5, x)) * 100) / 100;
+  save();
+  if (!el.paused) el.playbackRate = state.speed * baseRate;   // the clip playing now follows at once
+  document.dispatchEvent(new CustomEvent('speedchange', { detail: state.speed }));
+}
+let baseRate = 1;
+export const fmtSpeed = v => String(v).replace('.', state.lang === 'en' ? '.' : ',') + '×';
 
 let manifest = { words: [], tones: {}, chars: {} };
 let ready = fetch('audio/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : manifest).then(m => { manifest = m; }).catch(() => {});
@@ -9,6 +22,7 @@ export const audioReady = () => ready;
 const ver = () => manifest.v ? `?v=${manifest.v}` : '';
 export const tonesOf = syl => manifest.tones[sylKey(syl)] || '';
 export const exampleChar = (syl, tone) => manifest.chars[sylKey(syl) + tone] || '';
+export const hasClip = id => manifest.words.includes(id);
 
 const byText = {};
 for (const [id, text] of Object.entries(audioList())) if (!(text in byText) || id.startsWith('w_')) byText[text] = id;
@@ -35,8 +49,9 @@ function playUrl(url, rate = 1) {
     el.onended = () => done(true);
     el.onerror = () => done(false);
     el.src = url;
-    el.playbackRate = rate;
+    baseRate = rate;
     el.preservesPitch = true;
+    el.defaultPlaybackRate = el.playbackRate = Math.max(0.25, rate * getSpeed());
     el.play().catch(() => done(el.error ? false : null));
     // safety net: another clip took over, or the browser never fired "ended"
     guard = setInterval(() => { if (my !== token) done(null); else if (el.error) done(false); else if (el.ended) done(true); }, 200);
@@ -48,7 +63,7 @@ function tts(text, rate = 1) {
     if (!window.speechSynthesis) return res(false);
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'zh-CN';
-    u.rate = 0.8 * rate;
+    u.rate = Math.max(0.3, 0.8 * rate * getSpeed());
     const v = speechSynthesis.getVoices().find(v => /^zh([-_]CN)?/i.test(v.lang)) || speechSynthesis.getVoices().find(v => /^zh/i.test(v.lang));
     if (!v) return res(false);   // no Chinese voice on this device: silence is better than a wrong reading
     u.voice = v;
@@ -126,4 +141,5 @@ export async function record() {
     }),
   };
 }
-export const playBlob = async url => (await playUrl(url)) === true;
+// the learner's own recording always plays at its real speed
+export const playBlob = async url => (await playUrl(url, 1 / getSpeed())) === true;

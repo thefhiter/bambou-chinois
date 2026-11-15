@@ -4,7 +4,7 @@ import { CHARS, WORDS, SENTENCES, CHAR, WORD, SENT, NOTE, charAudio, SOUNDS_LIKE
 import { $, $$, esc, icon, on, shuffle, sample } from './ui.js';
 import { t, L } from './i18n.js';
 import { state, grade, learn, addXp, save, box } from './store.js';
-import { say, sfx, buzz, stopAudio, hasMic, record, playBlob, releaseMic } from './audio.js';
+import { say, sfx, buzz, stopAudio, hasMic, record, playBlob, releaseMic, getSpeed, fmtSpeed } from './audio.js';
 import { canRecognize, listen, stopListening, scoreSpeech } from './speech.js';
 import { makeWriter, hydrate, strokeCount } from './hanzi.js';
 
@@ -87,6 +87,7 @@ export function runSession(root, { steps, title, learnKeys = [], onDone }) {
         <button class="icon-btn" id="s-quit" aria-label="${esc(t('quit'))}">${icon('x')}</button>
         <div class="bar" role="progressbar" aria-label="${esc(title)}" aria-valuemin="0" aria-valuemax="100"><i id="s-bar"></i></div>
         <span class="s-count" id="s-count"></span>
+        <button class="speed-chip" data-speed aria-label="${esc(t('speedTitle'))} : ${fmtSpeed(getSpeed())}">${icon('gauge')}<b dir="ltr">${fmtSpeed(getSpeed())}</b></button>
       </header>
       <main class="s-body" id="s-body" tabindex="-1"></main>
       <footer class="s-foot" id="s-foot">

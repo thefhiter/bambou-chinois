@@ -109,6 +109,106 @@
    "text": "谁"
   },
   {
+   "id": "c_4ed6",
+   "text": "他"
+  },
+  {
+   "id": "c_4eec",
+   "text": "们"
+  },
+  {
+   "id": "c_5f88",
+   "text": "很"
+  },
+  {
+   "id": "c_53bb",
+   "text": "去"
+  },
+  {
+   "id": "c_559c",
+   "text": "喜"
+  },
+  {
+   "id": "c_6b22",
+   "text": "欢"
+  },
+  {
+   "id": "c_5bf9",
+   "text": "对"
+  },
+  {
+   "id": "c_7231",
+   "text": "爱"
+  },
+  {
+   "id": "c_771f",
+   "text": "真"
+  },
+  {
+   "id": "c_60a8",
+   "text": "您"
+  },
+  {
+   "id": "c_9ad8",
+   "text": "高"
+  },
+  {
+   "id": "c_5174",
+   "text": "兴"
+  },
+  {
+   "id": "c_8ba4",
+   "text": "认"
+  },
+  {
+   "id": "c_8bc6",
+   "text": "识"
+  },
+  {
+   "id": "c_90fd",
+   "text": "都"
+  },
+  {
+   "id": "c_8fd9",
+   "text": "这"
+  },
+  {
+   "id": "c_4e66",
+   "text": "书"
+  },
+  {
+   "id": "c_6c49",
+   "text": "汉"
+  },
+  {
+   "id": "c_8bed",
+   "text": "语"
+  },
+  {
+   "id": "c_6587",
+   "text": "文"
+  },
+  {
+   "id": "c_59d3",
+   "text": "姓"
+  },
+  {
+   "id": "c_6708",
+   "text": "月"
+  },
+  {
+   "id": "c_7a81",
+   "text": "突"
+  },
+  {
+   "id": "c_5c3c",
+   "text": "尼"
+  },
+  {
+   "id": "c_65af",
+   "text": "斯"
+  },
+  {
    "id": "w_wo",
    "text": "我"
   },
@@ -305,6 +405,110 @@
    "text": "玛丽"
   },
   {
+   "id": "w_nihao",
+   "text": "你好"
+  },
+  {
+   "id": "w_nihaoma",
+   "text": "你好吗"
+  },
+  {
+   "id": "w_hen",
+   "text": "很"
+  },
+  {
+   "id": "w_henhao",
+   "text": "很好"
+  },
+  {
+   "id": "w_tam",
+   "text": "他"
+  },
+  {
+   "id": "w_women",
+   "text": "我们"
+  },
+  {
+   "id": "w_nimen",
+   "text": "你们"
+  },
+  {
+   "id": "w_tamen",
+   "text": "他们"
+  },
+  {
+   "id": "w_tamenf",
+   "text": "她们"
+  },
+  {
+   "id": "w_nin",
+   "text": "您"
+  },
+  {
+   "id": "w_ninhao",
+   "text": "您好"
+  },
+  {
+   "id": "w_qu",
+   "text": "去"
+  },
+  {
+   "id": "w_xihuan",
+   "text": "喜欢"
+  },
+  {
+   "id": "w_ai",
+   "text": "爱"
+  },
+  {
+   "id": "w_dui",
+   "text": "对"
+  },
+  {
+   "id": "w_budui",
+   "text": "不对"
+  },
+  {
+   "id": "w_zhen",
+   "text": "真"
+  },
+  {
+   "id": "w_renshi",
+   "text": "认识"
+  },
+  {
+   "id": "w_gaoxing",
+   "text": "高兴"
+  },
+  {
+   "id": "w_dou",
+   "text": "都"
+  },
+  {
+   "id": "w_zhe",
+   "text": "这"
+  },
+  {
+   "id": "w_shu",
+   "text": "书"
+  },
+  {
+   "id": "w_hanyu",
+   "text": "汉语"
+  },
+  {
+   "id": "w_zhongwen",
+   "text": "中文"
+  },
+  {
+   "id": "w_xing",
+   "text": "姓"
+  },
+  {
+   "id": "w_yue",
+   "text": "月"
+  },
+  {
    "id": "s_nishi",
    "text": "你是哪国人?"
   },
@@ -369,24 +573,192 @@
    "text": "你问她。"
   },
   {
+   "id": "s_nihao",
+   "text": "你好!"
+  },
+  {
+   "id": "s_nihaoma",
+   "text": "你好吗?"
+  },
+  {
+   "id": "s_wohenhao",
+   "text": "我很好,你呢?"
+  },
+  {
+   "id": "s_woyehenhao",
+   "text": "我也很好。"
+  },
+  {
+   "id": "s_womenhao",
+   "text": "我们很好。"
+  },
+  {
+   "id": "s_tamenhao",
+   "text": "她们也很好。"
+  },
+  {
+   "id": "s_ninhao",
+   "text": "您好!"
+  },
+  {
+   "id": "s_gaoxing",
+   "text": "我很高兴认识你。"
+  },
+  {
+   "id": "s_woquzg",
+   "text": "我去中国。"
+  },
+  {
+   "id": "s_xihuan",
+   "text": "我喜欢汉语。"
+  },
+  {
+   "id": "s_tasheim",
+   "text": "他是谁?"
+  },
+  {
+   "id": "s_tasami",
+   "text": "他是萨米。"
+  },
+  {
+   "id": "s_zheshi",
+   "text": "这是什么?"
+  },
+  {
+   "id": "s_zheshu",
+   "text": "这是书。"
+  },
+  {
+   "id": "s_dou1",
+   "text": "我很不高兴。"
+  },
+  {
+   "id": "s_dou2",
+   "text": "我不很高兴。"
+  },
+  {
+   "id": "s_dou3",
+   "text": "我们都不高兴。"
+  },
+  {
+   "id": "s_dou4",
+   "text": "我们都不很高兴。"
+  },
+  {
+   "id": "s_dou5",
+   "text": "我们不都很高兴。"
+  },
+  {
+   "id": "s_dou6",
+   "text": "我们也不都很高兴。"
+  },
+  {
    "id": "s_d1",
-   "text": "小美,你是哪国人?",
-   "voice": "zh-CN-YunxiNeural"
+   "text": "小美,你是哪国人?"
   },
   {
    "id": "s_d2",
-   "text": "我是中国人。你呢?",
-   "voice": "zh-CN-XiaoxiaoNeural"
+   "text": "我是中国人。你呢?"
   },
   {
    "id": "s_d8",
-   "text": "玛丽,请问,你也是突尼斯人吗?",
-   "voice": "zh-CN-XiaoxiaoNeural"
+   "text": "玛丽,请问,你也是突尼斯人吗?"
   },
   {
    "id": "s_d9",
-   "text": "不,我不是突尼斯人。我是法国人。",
-   "voice": "zh-CN-XiaoyiNeural"
+   "text": "不,我不是突尼斯人。我是法国人。"
+  },
+  {
+   "id": "s_h2",
+   "text": "你好!你好吗?"
+  },
+  {
+   "id": "x_516b",
+   "text": "八"
+  },
+  {
+   "id": "x_6765",
+   "text": "来"
+  },
+  {
+   "id": "x_53e3",
+   "text": "口"
+  },
+  {
+   "id": "x_5403",
+   "text": "吃"
+  },
+  {
+   "id": "x_83dc",
+   "text": "菜"
+  },
+  {
+   "id": "x_6ce2",
+   "text": "波"
+  },
+  {
+   "id": "x_997f",
+   "text": "饿"
+  },
+  {
+   "id": "x_4e00",
+   "text": "一"
+  },
+  {
+   "id": "x_4e8c",
+   "text": "二"
+  },
+  {
+   "id": "x_5fd9",
+   "text": "忙"
+  },
+  {
+   "id": "x_5bb6",
+   "text": "家"
+  },
+  {
+   "id": "x_516d",
+   "text": "六"
+  },
+  {
+   "id": "x_5929",
+   "text": "天"
+  },
+  {
+   "id": "x_4e24",
+   "text": "两"
+  },
+  {
+   "id": "x_718a",
+   "text": "熊"
+  },
+  {
+   "id": "x_82b1",
+   "text": "花"
+  },
+  {
+   "id": "x_5feb",
+   "text": "快"
+  },
+  {
+   "id": "x_6625",
+   "text": "春"
+  },
+  {
+   "id": "x_738b",
+   "text": "王"
+  },
+  {
+   "id": "x_7fc1",
+   "text": "翁"
+  },
+  {
+   "id": "x_8fdc",
+   "text": "远"
+  },
+  {
+   "id": "x_4e91",
+   "text": "云"
   },
   {
    "id": "g_na_0",
@@ -447,6 +819,70 @@
   {
    "id": "g_qingwen_0",
    "text": "请问,你是哪国人?"
+  },
+  {
+   "id": "g_hen_0",
+   "text": "我很好。"
+  },
+  {
+   "id": "g_hen_1",
+   "text": "我很高兴。"
+  },
+  {
+   "id": "g_men_0",
+   "text": "我们"
+  },
+  {
+   "id": "g_men_1",
+   "text": "你们"
+  },
+  {
+   "id": "g_men_2",
+   "text": "他们"
+  },
+  {
+   "id": "g_men_3",
+   "text": "她们"
+  },
+  {
+   "id": "g_ta_0",
+   "text": "他是萨米。"
+  },
+  {
+   "id": "g_ta_1",
+   "text": "她是玛丽。"
+  },
+  {
+   "id": "g_nin_0",
+   "text": "您好!"
+  },
+  {
+   "id": "g_dou_0",
+   "text": "我们都不高兴。"
+  },
+  {
+   "id": "g_dou_1",
+   "text": "我们不都很高兴。"
+  },
+  {
+   "id": "g_zhe_0",
+   "text": "这是什么?"
+  },
+  {
+   "id": "g_zhe_1",
+   "text": "这是书。"
+  },
+  {
+   "id": "g_xihuan_0",
+   "text": "我喜欢汉语。"
+  },
+  {
+   "id": "g_dui_0",
+   "text": "对!"
+  },
+  {
+   "id": "g_dui_1",
+   "text": "不对。"
   }
  ],
  "syllables": [

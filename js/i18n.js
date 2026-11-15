@@ -8,16 +8,22 @@ const S = {
   navPinyin: ['Pinyin', 'البينيين', 'Pinyin'],
   navReview: ['Réviser', 'المراجعة', 'Review'],
   navTutor: ['Tuteur IA', 'المعلّم الذكي', 'AI tutor'],
+  // voice speed
+  speedTitle: ['Vitesse de la voix', 'سرعة الصوت', 'Voice speed'],
+  speedSub: ['Pour tous les sons de l’appli. Plus lent pour bien entendre chaque son, plus vite pour s’habituer.', 'لكلّ أصوات التطبيق. أبطأ لتسمع كلّ صوت جيّدًا، وأسرع لتتعوّد.', 'For every sound in the app. Slower to hear each sound clearly, faster to get used to it.'],
+  speedFine: ['Réglage fin', 'ضبط دقيق', 'Fine tuning'],
+  speedTest: ['Écouter un exemple', 'استمع إلى مثال', 'Hear an example'],
+  speedHint: ['La hauteur de la voix ne change pas : les tons restent justes.', 'لا تتغيّر حدّة الصوت: تبقى النغمات صحيحة.', 'The pitch does not change: the tones stay right.'],
   settings: ['Réglages', 'الإعدادات', 'Settings'],
   back: ['Retour', 'رجوع', 'Back'],
   // onboarding
   welcome: ['Apprends le chinois, pour de vrai', 'تعلّم الصينية بحقّ', 'Learn Chinese, for real'],
-  welcomeSub: ['Lire, écrire, prononcer et parler — leçon « 你是哪国人? » de ton manuel.', 'القراءة والكتابة والنطق والمحادثة — درس «你是哪国人?» من كتابك المدرسي.', 'Read, write, pronounce and speak — the lesson "你是哪国人?" from your textbook.'],
+  welcomeSub: ['Lire, écrire, prononcer et parler — les leçons « 你好! » et « 你是哪国人? ».', 'القراءة والكتابة والنطق والمحادثة — درسا «你好!» و«你是哪国人?».', 'Read, write, pronounce and speak — the lessons "你好!" and "你是哪国人?".'],
   chooseLang: ['Choisis ta langue', 'اختر لغتك', 'Choose your language'],
   letsGo: ['C’est parti', 'هيّا نبدأ', 'Let’s go'],
   // home
   homeTitle: ['Ton parcours de chinois', 'مسارك في تعلّم الصينية', 'Your Chinese path'],
-  homeSub: ['Leçon 2 · 你是哪国人?', 'الدرس 2 · 你是哪国人?', 'Lesson 2 · 你是哪国人?'],
+  homeSub: ['Leçons 1 et 2 · 你好! 你是哪国人?', 'الدرسان 1 و2 · 你好! 你是哪国人?', 'Lessons 1 and 2 · 你好! 你是哪国人?'],
   streak: ['jours de suite', 'أيّام متتالية', 'day streak'],
   dailyGoal: ['Objectif du jour', 'هدف اليوم', 'Daily goal'],
   goalDone: ['Objectif atteint !', 'تحقّق الهدف!', 'Goal reached!'],
@@ -135,9 +141,10 @@ const S = {
   earRound: ['Question {i} · score {score}', 'السؤال {i} · النتيجة {score}', 'Question {i} · score {score}'],
   toneRows: ['Les syllabes de la leçon, aux 4 tons', 'مقاطع الدرس بالنغمات الأربع', 'The syllables of the lesson in 4 tones'],
   initials: ['Initiales (声母)', 'الصوامت الأولى (声母)', 'Initials (声母)'],
-  initialsSub: ['La consonne du début de la syllabe.', 'الصامت في أوّل المقطع.', 'The consonant at the start of the syllable.'],
+  initialsSub: ['La consonne du début de la syllabe. « Sans souffle » / « avec un souffle » : mets la main devant la bouche.', 'الحرف الساكن في أوّل المقطع. «بلا نفَس» / «مع نفَس»: ضع يدك أمام فمك.', 'The consonant at the start of the syllable. "No puff" / "with a puff": put your hand in front of your mouth.'],
   finals: ['Finales (韵母)', 'الخواتم (韵母)', 'Finals (韵母)'],
-  finalsSub: ['La partie voyelle de la syllabe.', 'الجزء الصائت من المقطع.', 'The vowel part of the syllable.'],
+  finalsSub: ['La partie voyelle de la syllabe. Attention aux pièges pour un francophone : e, -i, an, en, ian.', 'الجزء الصائت من المقطع. انتبه إلى: e و-i وan وen وian.', 'The vowel part of the syllable. Watch out for: e, -i, an, en, ian.'],
+  soundsSub: ['Tous les sons du chinois, avec la façon de les dire et un mot à écouter pour chacun.', 'كلّ أصوات الصينية، مع طريقة نطقها وكلمة تسمعها لكلّ صوت.', 'Every sound of Chinese, how to say it, and a word to hear for each.'],
   pairsTitle: ['Ne confonds pas', 'لا تخلط بينها', 'Don’t mix them up'],
   pairsSub: ['Écoute la différence entre les deux.', 'استمع إلى الفرق بين الاثنين.', 'Listen for the difference between the two.'],
   spelling: ['Former les syllabes', 'تكوين المقاطع', 'Building syllables'],
@@ -216,7 +223,7 @@ const S = {
   resetConfirm: ['Effacer toute ta progression sur cet appareil ? Impossible d’annuler.', 'هل تريد مسح كلّ تقدّمك على هذا الجهاز؟ لا يمكن التراجع.', 'Erase all your progress on this device? This cannot be undone.'],
   resetDone: ['Progression effacée.', 'تمّ مسح التقدّم.', 'Progress erased.'],
   about: ['À propos', 'حول التطبيق', 'About'],
-  aboutText: ['Bambou 竹 suit la leçon 2 du manuel de chinois de 3ème année (pages 20–27) et les tableaux de pinyin (pages 173–175). Ta progression est gardée sur cet appareil. Une fois ouverte, l’appli marche aussi hors ligne.', 'تطبيق Bambou 竹 يتّبع الدرس 2 من كتاب الصينية للسنة الثالثة (الصفحات 20–27) وجداول البينيين (الصفحات 173–175). يُحفظ تقدّمك على هذا الجهاز. بعد فتحه أوّل مرّة يعمل التطبيق دون اتصال أيضًا.', 'Bambou 竹 follows lesson 2 of the 3rd-year Chinese textbook (pages 20–27) and the pinyin charts (pages 173–175). Your progress is kept on this device. Once opened, the app also works offline.'],
+  aboutText: ['Bambou 竹 suit les leçons 1 et 2 du cours, la leçon 2 du manuel de chinois de 3ème année (pages 20–27) et les tableaux de pinyin (pages 173–175). Ta progression est gardée sur cet appareil. Une fois ouverte, l’appli marche aussi hors ligne.', 'تطبيق Bambou 竹 يتّبع الدرسين 1 و2 كما دُرّسا في القسم، والدرس 2 من كتاب الصينية للسنة الثالثة (الصفحات 20–27) وجداول البينيين (الصفحات 173–175). يُحفظ تقدّمك على هذا الجهاز. بعد فتحه أوّل مرّة يعمل التطبيق دون اتصال أيضًا.', 'Bambou 竹 follows lessons 1 and 2 of the course, lesson 2 of the 3rd-year Chinese textbook (pages 20–27) and the pinyin charts (pages 173–175). Your progress is kept on this device. Once opened, the app also works offline.'],
 };
 
 const IDX = { fr: 0, ar: 1, en: 2 };

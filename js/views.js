@@ -1,16 +1,16 @@
 // Screens: home path, characters, character studio, pinyin lab, review, dialogue.
-import { CHARS, EXTRA_CHARS, WORDS, SENTENCES, DIALOGUE, SPEAKERS, GRAMMAR, INITIALS, FINALS, TONE_ROWS, TONES, SANDHI, PATH, CHAR, charAudio } from './data.js';
+import { CHARS, EXTRA_CHARS, WORDS, SENTENCES, DIALOGUES, SPEAKERS, GRAMMAR, SOUND_CHART, TONE_ROWS, TONES, SANDHI, PATH, CHAR, charAudio, exAudio } from './data.js';
 import { TABLES, mark, sylKey } from './pinyin-table.js';
 import { $, $$, esc, icon, on, sheet, toast, sample, shuffle } from './ui.js';
 import { t, L } from './i18n.js';
 import { state, save, addXp, xpToday, liveStreak, DAILY_GOAL, box, known, dueKeys, weakKeys, nextDue } from './store.js';
-import { say, playSyl, tonesOf, exampleChar, sfx, stopAudio, hasMic, record, playBlob, audioReady } from './audio.js';
+import { say, playSyl, tonesOf, exampleChar, sfx, stopAudio, hasMic, record, playBlob, audioReady, hasClip } from './audio.js';
 import { canRecognize, listen, scoreSpeech, trackPitch, analyseContour, drawTone } from './speech.js';
 import { charData, svgFor, hydrate, strokeStrip, makeWriter } from './hanzi.js';
 import { lessonSteps, reviewSteps, runSession, toneSvg } from './session.js';
 
 const go = h => { location.hash = h; };
-const nodeHref = n => n.kind === 'lesson' ? `#/lesson/${n.id}` : n.kind === 'dialogue' ? '#/dialogue' : `#/pinyin/${n.sec}`;
+const nodeHref = n => n.kind === 'lesson' ? `#/lesson/${n.id}` : n.kind === 'dialogue' ? `#/dialogue/${n.dlg || 'main'}` : `#/pinyin/${n.sec}`;
 const lessonKeys = n => [...n.chars.map(c => 'c:' + c), ...n.words.map(w => 'w:' + w), ...n.sents.map(s => 's:' + s)];
 function complete(id, stars = 3, xp = 10) {
   const first = !state.done[id];
@@ -322,33 +322,37 @@ function pyTones(body) {
 }
 
 function pySounds(body) {
-  const card = x => { const [s, n] = parseEx(x.ex); return `<article class="card sound-card">
-    <button class="snd" data-syl="${s}" data-tone="${n}" aria-label="${esc(t('listen'))} ${mark(s, n)}">${icon('sound')}</button>
-    <div><h2 dir="ltr"><span class="sym">${x.s}</span> <span class="py">${mark(s, n)}</span> <span class="hz" lang="zh-Hans">${exampleChar(s, n)}</span></h2><p class="muted">${esc(L(x.h))}</p></div></article>`; };
+  let group = 'initials';
+  const card = x => `<li class="card sound-card">
+    <button class="snd" data-say="${esc(x.ex)}" data-id="${exAudio(x.ex)}" aria-label="${esc(t('listen'))} ${esc(x.py)}">${icon('sound')}</button>
+    <div><h2 dir="ltr"><span class="sym">${esc(x.s)}</span> <span class="hz" lang="zh-Hans">${esc(x.ex)}</span> <span class="py">${esc(x.py)}</span></h2><p class="muted">${esc(L(x.say))}</p></div></li>`;
   const draw = () => {
-    body.innerHTML = `<h2 class="sec-title">${esc(t('initials'))}</h2><p class="muted">${esc(t('initialsSub'))}</p>
-      <div class="sound-grid">${INITIALS.map(card).join('')}</div>
+    const list = SOUND_CHART[group];
+    body.innerHTML = `<p class="muted">${esc(t('soundsSub'))}</p>
+      <div class="seg" role="group" aria-label="${esc(t('tabSounds'))}">
+        ${['initials', 'finals'].map(g => `<button data-grp="${g}" class="${g === group ? 'on' : ''}" aria-pressed="${g === group}">${esc(t(g))} · ${SOUND_CHART[g].length}</button>`).join('')}</div>
+      <p class="muted small">${esc(t(group + 'Sub'))}</p>
+      <ul class="sound-grid">${list.map(card).join('')}</ul>
       <section class="card"><h2>${esc(t('pairsTitle'))}</h2><p class="muted">${esc(t('pairsSub'))}</p>
         <div class="row wrap" dir="ltr">${[['ba', 4, 'pa', 4], ['da', 4, 'ta', 4], ['zi', 4, 'zhi', 4], ['si', 4, 'shi', 4], ['ji', 1, 'qi', 1], ['nu', 3, 'nv', 3], ['wen', 4, 'weng', 1], ['ren', 2, 'reng', 2]]
           .map(([a, x, b, y]) => `<span class="pair"><button class="pill" data-syl="${a}" data-tone="${x}">${mark(a, x)}</button><button class="pill" data-syl="${b}" data-tone="${y}">${mark(b, y)}</button></span>`).join('')}</div></section>
-      <h2 class="sec-title">${esc(t('finals'))}</h2><p class="muted">${esc(t('finalsSub'))}</p>
-      <div class="sound-grid">${FINALS.map(card).join('')}</div>
       <h2 class="sec-title">${esc(t('spelling'))}</h2>
       <div class="card"><ul class="rules" dir="ltr">
         <li>t + u = <b>tu</b> · n + ü = <b>nü</b> · y + e = <b>ye</b> (= ie)</li>
         <li>y + ou = <b>you</b> (= iou) · g + uo = <b>guo</b> · w + en = <b>wen</b> (= uen)</li>
+        <li>q + ü = <b>qu</b> · x + üe = <b>xue</b> · y + ün = <b>yun</b> (ü → u)</li>
         <li>s + (-i) = <b>si</b> · z + (-i) = <b>zi</b> · sh + (-i) = <b>shi</b></li>
         <li>p + eng = <b>peng</b> · zh + ong = <b>zhong</b> · q + ing = <b>qing</b></li>
       </ul><p class="muted">${esc(t('spellingNote'))}</p></div>
       ${doneBtn('p_sounds')}`;
   };
   draw();
-  audioReady().then(draw);
+  on(body, 'click', '[data-grp]', el => { group = el.dataset.grp; draw(); $('[data-grp].on', body)?.focus(); });
 }
 
 function pySandhi(body) {
   body.innerHTML = SANDHI.map(r => `<section class="card"><h2>${esc(L(r.title))}</h2><p>${esc(L(r.body))}</p>
-    <ul class="word-list">${r.ex.map(([hz, py, id]) => `<li><button class="word" data-say="${esc(hz)}" data-id="w_${id}"><span class="hz" lang="zh-Hans">${esc(hz)}</span><span class="py grow" dir="ltr">${esc(py)}</span>${icon('sound', 'sm')}</button></li>`).join('')}</ul></section>`).join('') +
+    <ul class="word-list">${r.ex.map(([hz, py, id]) => `<li><button class="word" data-say="${esc(hz)}" data-id="${id.startsWith('s_') ? id : 'w_' + id}"><span class="hz" lang="zh-Hans">${esc(hz)}</span><span class="py grow" dir="ltr">${esc(py)}</span>${icon('sound', 'sm')}</button></li>`).join('')}</ul></section>`).join('') +
     `<section class="card"><h2>${esc(t('sandhiTry'))}</h2>
       <ul class="word-list">${['s_bushi', 's_tanvpy', 's_tajiao'].map(id => { const s = SENTENCES.find(x => x.id === id); return `<li><button class="word" data-say="${esc(s.hz)}"><span class="hz" lang="zh-Hans" dir="ltr">${esc(s.hz)}</span><span class="py grow" dir="ltr">${esc(s.py)}</span>${icon('sound', 'sm')}</button></li>`; }).join('')}</ul></section>
     ${doneBtn('p_sandhi')}`;
@@ -418,13 +422,15 @@ export function review(root) {
 }
 
 /* ================= DIALOGUE ================= */
-export function dialogue(root) {
+export function dialogue(root, which = 'main') {
+  const D = DIALOGUES[which] || DIALOGUES.main, DIALOGUE = D.lines;
+  const cast = [...new Set(DIALOGUE.map(d => d.who))];
   let showPy = true, showTr = true, role = null, running = false;
   const rec = canRecognize();
   const draw = () => {
     root.innerHTML = `
       <header class="page-head row"><a class="icon-btn" href="#/home" aria-label="${esc(t('back'))}">${icon('prev', 'flip')}</a>
-        <div class="grow"><h1><span class="hz" lang="zh-Hans">你是哪国人?</span></h1><p class="muted">${esc(t('dlgSub'))}</p></div></header>
+        <div class="grow"><h1><span class="hz" lang="zh-Hans">${esc(D.title)}</span></h1><p class="muted">${esc(t('dlgSub'))}</p></div></header>
       <div class="row wrap">
         <button class="btn primary" id="d-all">${icon('play')} ${esc(t('playAll'))}</button>
         <button class="pill ${showPy ? 'on' : ''}" id="d-py" aria-pressed="${showPy}">Pīnyīn</button>
@@ -432,7 +438,7 @@ export function dialogue(root) {
       </div>
       <section class="card role-card">
         <h2>${icon('mic')} ${esc(t('rolePlay'))}</h2><p class="muted">${esc(t(rec || hasMic() ? 'roleSub' : 'micUnavailable'))}</p>
-        <div class="row wrap">${Object.entries(SPEAKERS).map(([k, s]) => `<button class="pill role ${role === k ? 'on' : ''}" data-role="${k}" style="--c:${s.color}"><span class="hz" lang="zh-Hans">${s.hz}</span> <span dir="ltr">${s.py}</span></button>`).join('')}</div>
+        <div class="row wrap">${cast.map(k => [k, SPEAKERS[k]]).map(([k, s]) => `<button class="pill role ${role === k ? 'on' : ''}" data-role="${k}" style="--c:${s.color}"><span class="hz" lang="zh-Hans">${s.hz}</span> <span dir="ltr">${s.py}</span></button>`).join('')}</div>
       </section>
       <ol class="dlg" id="d-lines">
         ${DIALOGUE.map((d, i) => `<li class="line ${d.who} ${role === d.who ? 'mine' : ''}" data-i="${i}" style="--c:${SPEAKERS[d.who].color}">
@@ -448,7 +454,7 @@ export function dialogue(root) {
           </div></li>`).join('')}
       </ol>
       <p class="cs-msg" id="d-msg" role="status" aria-live="polite"></p>
-      ${doneBtn('dlg')}`;
+      ${doneBtn(D.done)}`;
   };
   const line = i => $(`.line[data-i="${i}"]`, root);
   const focus = i => { $$('.line', root).forEach(l => l.classList.remove('now')); if (i != null) { line(i).classList.add('now'); line(i).scrollIntoView({ block: 'center', behavior: 'smooth' }); } };

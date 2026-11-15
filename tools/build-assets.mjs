@@ -4,7 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ALL_HANZI, audioList, DIALOGUE } from '../js/data.js';
+import { ALL_HANZI, audioList } from '../js/data.js';
 import { ALL_SYLLABLES, sylKey } from '../js/pinyin-table.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -23,10 +23,10 @@ for (const c of ALL_HANZI) {
 fs.writeFileSync(path.join(root, 'data/chars.json'), JSON.stringify(chars));
 console.log('chars:', Object.keys(chars).length);
 
-const voices = { sami: 'zh-CN-YunxiNeural', xiaomei: 'zh-CN-XiaoxiaoNeural', mali: 'zh-CN-XiaoyiNeural' };
-const byLine = Object.fromEntries(DIALOGUE.map(d => [d.s, voices[d.who]]));
+// Every clip, dialogue lines included, is said by the voice the learners chose by ear (gen_audio.py LESSON_VOICE):
+// the other voices said h and r wrongly for them (好 must sound "khao", 人 "jen").
 const list = audioList();
-const clips = Object.entries(list).map(([id, text]) => ({ id, text, voice: id.startsWith('s_d') ? byLine[id] : undefined }));
+const clips = Object.entries(list).map(([id, text]) => ({ id, text }));
 fs.writeFileSync(path.join(root, 'tools/audio-list.json'),
   JSON.stringify({ clips, syllables: ALL_SYLLABLES.map(sylKey) }, null, 1));
 console.log('clips:', clips.length, 'syllables:', ALL_SYLLABLES.length);

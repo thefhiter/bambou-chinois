@@ -34,6 +34,9 @@ SINGLE_RATE = -30   # one-syllable lesson words are said slower than phrases (-1
 # What is sent to the voice when it would misread the real text. The app still shows the real text.
 #   哪: every zh-CN voice says "něi" (colloquial); the textbook teaches nǎ. 乸 is read as a plain nǎ.
 SAY = {'哪': '乸'}
+# Only for a clip of the character on its own (tools/readcheck.py measures how the voice reads them):
+#   兴 alone is read xīng; the lesson needs xìng (高兴). 杏 is read xìng, identical audio.
+SAY_ALONE = {'兴': '杏'}
 
 # Characters of the lesson (and a few syllables the dictionary lists under another reading).
 OVERRIDES = {
@@ -190,6 +193,8 @@ async def main():
     async def lesson_clip(c):
         dest = os.path.join(wdir, c['id'] + '.mp3')
         text = ''.join(SAY.get(ch, ch) for ch in c['text'])
+        if len(han(c['text'])) == 1:
+            text = ''.join(SAY_ALONE.get(ch, ch) for ch in text)
         voice = c.get('voice') or LESSON_VOICE
         sig = signature(text, voice, RECIPE)
         if os.path.exists(dest) and made.get('w/' + c['id']) == sig:

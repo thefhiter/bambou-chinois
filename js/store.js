@@ -2,7 +2,7 @@
 const KEY = 'bambou.v1';
 const DAY = 86400000;
 const defaults = () => ({
-  lang: null, theme: 'auto', showPinyin: true, speak: true,
+  lang: null, theme: 'auto', showPinyin: true, speak: true, speed: 1,   // speed: voice speed, 0.5 to 1.5
   xp: 0, streak: 0, lastDay: null, dayXp: {},
   done: {},            // path id -> { stars, at }
   srs: {},             // 'c:你' | 'w:ni' | 's:s_x' -> { box, due, ok, ko }
@@ -19,7 +19,7 @@ function load() {
 }
 export const state = load();
 export function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* private mode */ } }
-export function resetAll() { const keep = { lang: state.lang, theme: state.theme, ai: state.ai }; Object.assign(state, defaults(), keep); save(); }
+export function resetAll() { const keep = { lang: state.lang, theme: state.theme, ai: state.ai, speed: state.speed }; Object.assign(state, defaults(), keep); save(); }
 
 export const today = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 export const DAILY_GOAL = 40;

@@ -59,10 +59,61 @@ export const CHARS = [
     hint: T('讠(parole) + 青 (qīng) pour le son : des paroles polies.', '讠(كلام) + 青 (qīng) للصوت: كلام مهذّب.', '讠(speech) + 青 (qīng) for the sound: polite words.') },
   { c: '谁', py: 'shéi', m: T('qui', 'مَن', 'who'),
     hint: T('讠(parole) + 隹 (oiseau) : « qui » parle comme un oiseau ?', '讠(كلام) + 隹 (طائر): «من» يتكلّم كالطائر؟', '讠(speech) + 隹 (bird): "who" is chattering like a bird?') },
+  // ---- lesson 1 of the course, and more of lesson 2 ----
+  { c: '他', py: 'tā', m: T('il, lui', 'هو', 'he, him'),
+    hint: T('亻(personne) + 也 : « il ». Même son que 她 (elle) : tā.', '亻(شخص) + 也: «هو». له نفس صوت 她 (هي): tā.', '亻(person) + 也: "he". Same sound as 她 (she): tā.') },
+  { c: '们', py: 'men', m: T('(pluriel des personnes)', '(علامة الجمع للأشخاص)', '(plural for people)'),
+    hint: T('亻(personne) + 门 (mén, porte) qui donne le son : du monde à la porte, c’est le pluriel.', '亻(شخص) + 门 (mén، باب) الذي يعطي الصوت: أشخاص عند الباب، إنّه الجمع.', '亻(person) + 门 (mén, door) for the sound: people at the door, the plural.') },
+  { c: '很', py: 'hěn', m: T('très', 'جدًّا', 'very'),
+    hint: T('彳(marcher) + 艮. Il se met devant l’adjectif : 很好 = très bien.', '彳(المشي) + 艮. يوضع قبل الصفة: 很好 = جيّد جدًّا.', '彳(walk) + 艮. It goes before the adjective: 很好 = very good.') },
+  { c: '去', py: 'qù', m: T('aller', 'يذهب', 'to go'),
+    hint: T('土 (la terre) + 厶 : quelqu’un qui quitte sa terre, il « va » ailleurs.', '土 (الأرض) + 厶: شخص يغادر أرضه، «يذهب» بعيدًا.', '土 (earth) + 厶: someone leaving their land, "going" away.') },
+  { c: '喜', py: 'xǐ', m: T('joie', 'فرح', 'joy'),
+    hint: T('Un tambour 壴 au-dessus d’une bouche 口 : on chante de joie.', 'طبل 壴 فوق فم 口: نغنّي من الفرح.', 'A drum 壴 above a mouth 口: singing for joy.') },
+  { c: '欢', py: 'huān', m: T('joyeux (dans 喜欢)', 'مسرور (في 喜欢)', 'joyful (in 喜欢)'),
+    hint: T('又 (main) + 欠 (bouche grande ouverte) : un cri de joie. Dans 喜欢 il se dit léger : xǐhuan.', '又 (يد) + 欠 (فم مفتوح): صيحة فرح. في 喜欢 يُنطق خفيفًا: xǐhuan.', '又 (hand) + 欠 (wide-open mouth): a shout of joy. In 喜欢 it is said lightly: xǐhuan.') },
+  { c: '对', py: 'duì', m: T('juste, correct', 'صحيح', 'right, correct'),
+    hint: T('又 (main) + 寸 (le pouce, la mesure) : mesuré à la main, c’est « juste ».', '又 (يد) + 寸 (الإبهام، القياس): ما قيس باليد «صحيح».', '又 (hand) + 寸 (thumb, a measure): measured by hand, it is "right".') },
+  { c: '爱', py: 'ài', m: T('aimer', 'يحبّ', 'to love'),
+    hint: T('Une main 爫 qui couvre 冖 un ami 友 : aimer, c’est protéger.', 'يد 爫 تغطّي 冖 صديقًا 友: الحبّ حماية.', 'A hand 爫 covering 冖 a friend 友: to love is to protect.') },
+  { c: '真', py: 'zhēn', m: T('vraiment, vrai', 'حقًّا، حقيقي', 'really, true'),
+    hint: T('十 (dix) + 目 (l’œil) : ce que dix yeux ont vu est « vrai ».', '十 (عشرة) + 目 (العين): ما رأته عشر عيون «حقيقي».', '十 (ten) + 目 (eye): what ten eyes have seen is "true".') },
+  { c: '您', py: 'nín', m: T('vous (politesse)', 'حضرتك (للاحترام)', 'you (polite)'),
+    hint: T('你 (tu) posé sur 心 (le cœur) : « tu » dit avec respect, pour le professeur.', '你 (أنت) فوق 心 (القلب): «أنت» تُقال باحترام، للأستاذ مثلًا.', '你 (you) on top of 心 (heart): "you" said with respect, e.g. to the teacher.') },
+  { c: '高', py: 'gāo', m: T('haut, grand', 'عالٍ، طويل', 'tall, high'),
+    hint: T('Une tour à étages vue de face, avec son toit : haut.', 'برج بطوابق من الأمام مع سقفه: عالٍ.', 'A tower with storeys and a roof, seen from the front: high.') },
+  { c: '兴', py: 'xìng', m: T('joie (dans 高兴)', 'فرح (في 高兴)', 'joy (in 高兴)'),
+    hint: T('Dans 高兴 (content) il se lit xìng, 4ᵉ ton. Trois traits qui sautent de joie.', 'في 高兴 (سعيد) يُقرأ xìng بالنغمة الرابعة. ثلاثة خطوط تقفز فرحًا.', 'In 高兴 (glad) it reads xìng, 4th tone. Three strokes jumping for joy.') },
+  { c: '认', py: 'rèn', m: T('reconnaître', 'يتعرّف', 'to recognise'),
+    hint: T('讠(parole) + 人 (personne) : on reconnaît une personne en lui parlant.', '讠(كلام) + 人 (شخص): نتعرّف على الشخص حين نكلّمه.', '讠(speech) + 人 (person): you recognise a person by talking to them.') },
+  { c: '识', py: 'shí', m: T('connaître (dans 认识)', 'يعرف (في 认识)', 'to know (in 认识)'),
+    hint: T('讠(parole) + 只. Seul il se dit shí ; dans 认识 il devient léger : rènshi.', '讠(كلام) + 只. وحده يُنطق shí، وفي 认识 يصبح خفيفًا: rènshi.', '讠(speech) + 只. Alone it is shí; in 认识 it turns light: rènshi.') },
+  { c: '都', py: 'dōu', m: T('tous, tout', 'كلّ، جميعًا', 'all, both'),
+    hint: T('者 + 阝(la ville, à droite) : tous les gens de la ville. Toujours devant le verbe.', '者 + 阝(المدينة، على اليمين): كلّ أهل المدينة. دائمًا قبل الفعل.', '者 + 阝(town, on the right): everyone in town. Always before the verb.') },
+  { c: '这', py: 'zhè', m: T('ce, ceci', 'هذا', 'this'),
+    hint: T('辶 (marcher) + 文 : la chose juste là, à deux pas de moi.', '辶 (المشي) + 文: الشيء القريب، على بعد خطوتين.', '辶 (walk) + 文: the thing right here, two steps away.') },
+  { c: '书', py: 'shū', m: T('livre', 'كتاب', 'book'),
+    hint: T('4 traits : une main qui tient le pinceau pour écrire un livre.', '4 خطوط: يد تمسك الريشة لتكتب كتابًا.', '4 strokes: a hand holding the brush to write a book.') },
+  { c: '汉', py: 'hàn', m: T('Han, chinois', 'الهان، صيني', 'Han, Chinese'),
+    hint: T('氵(eau) + 又 : le fleuve Han a donné son nom aux Chinois. 汉语 = la langue chinoise.', '氵(ماء) + 又: نهر هان أعطى اسمه للصينيين. 汉语 = اللغة الصينية.', '氵(water) + 又: the Han river gave the Chinese their name. 汉语 = Chinese language.') },
+  { c: '语', py: 'yǔ', m: T('langue, parole', 'لغة، كلام', 'language, speech'),
+    hint: T('讠(parole) + 吾 (moi) : les mots que je parle, une langue.', '讠(كلام) + 吾 (أنا): الكلمات التي أتكلّمها، لغة.', '讠(speech) + 吾 (I): the words I speak, a language.') },
+  { c: '文', py: 'wén', m: T('écriture, langue', 'كتابة، لغة', 'writing, language'),
+    hint: T('Une personne avec un dessin sur la poitrine : les premiers signes écrits. 中文 = le chinois.', 'شخص على صدره رسم: أولى العلامات المكتوبة. 中文 = الصينية.', 'A person with a drawing on the chest: the first written signs. 中文 = Chinese.') },
+  { c: '姓', py: 'xìng', m: T('nom de famille', 'اسم العائلة', 'family name'),
+    hint: T('女 (femme) + 生 (naître) : le nom qu’on reçoit à la naissance.', '女 (امرأة) + 生 (يولد): الاسم الذي نأخذه عند الولادة.', '女 (woman) + 生 (be born): the name you get at birth.') },
+  { c: '月', py: 'yuè', m: T('lune, mois', 'قمر، شهر', 'moon, month'),
+    hint: T('Un croissant de lune. Deux 月 côte à côte font 朋 (ami).', 'هلال القمر. اثنان من 月 جنبًا إلى جنب يكوّنان 朋 (صديق).', 'A crescent moon. Two 月 side by side make 朋 (friend).') },
+  { c: '突', py: 'tū', m: T('soudain ; 1ʳᵉ syllabe de 突尼斯', 'فجأة؛ المقطع الأوّل من 突尼斯', 'sudden; 1st syllable of 突尼斯'),
+    hint: T('穴 (un trou) + 犬 (un chien) : un chien qui surgit du trou !', '穴 (حفرة) + 犬 (كلب): كلب يقفز فجأة من الحفرة!', '穴 (a hole) + 犬 (a dog): a dog jumping out of a hole!') },
+  { c: '尼', py: 'ní', m: T('(son « ní » de 突尼斯)', '(صوت «ní» في 突尼斯)', '(the sound "ní" in 突尼斯)'),
+    hint: T('Sert surtout pour le son ní. On le retrouve dans 呢 (ne).', 'يُستعمل خاصّة لصوت ní. نجده أيضًا في 呢 (ne).', 'Used mostly for the sound ní. You find it again in 呢 (ne).') },
+  { c: '斯', py: 'sī', m: T('(son « sī » de 突尼斯)', '(صوت «sī» في 突尼斯)', '(the sound "sī" in 突尼斯)'),
+    hint: T('其 + 斤 (une hache) : 12 traits, il sert pour le son sī.', '其 + 斤 (فأس): 12 خطًّا، يُستعمل لصوت sī.', '其 + 斤 (an axe): 12 strokes, used for the sound sī.') },
 ];
 
 // Characters you only need to recognise (country names, first names).
-export const EXTRA_CHARS = '日本突尼斯印度意大利西班牙德英澳亚萨米玛丽';
+export const EXTRA_CHARS = '日本印度意大利西班牙德英澳亚萨米玛丽';
 
 /* ---------- Vocabulary ---------- */
 export const WORDS = [
@@ -115,6 +166,33 @@ export const WORDS = [
   { id: 'sami', hz: '萨米', py: 'Sàmǐ', m: T('Sami (prénom)', 'سامي (اسم)', 'Sami (name)') },
   { id: 'xiaomei', hz: '小美', py: 'Xiǎoměi', m: T('Xiaomei (prénom)', 'شياو ماي (اسم)', 'Xiaomei (name)') },
   { id: 'mali', hz: '玛丽', py: 'Mǎlì', m: T('Marie (prénom)', 'ماري (اسم)', 'Mary (name)') },
+  // ---- lesson 1 of the course, and more of lesson 2 ----
+  { id: 'nihao', hz: '你好', py: 'nǐ hǎo', m: T('bonjour', 'مرحبًا', 'hello') },
+  { id: 'nihaoma', hz: '你好吗', py: 'nǐ hǎo ma', m: T('comment vas-tu ?', 'كيف حالك؟', 'how are you?') },
+  { id: 'hen', hz: '很', py: 'hěn', m: T('très', 'جدًّا', 'very') },
+  { id: 'henhao', hz: '很好', py: 'hěn hǎo', m: T('très bien', 'جيّد جدًّا', 'very well') },
+  { id: 'tam', hz: '他', py: 'tā', m: T('il, lui', 'هو', 'he, him') },
+  { id: 'women', hz: '我们', py: 'wǒmen', m: T('nous', 'نحن', 'we, us') },
+  { id: 'nimen', hz: '你们', py: 'nǐmen', m: T('vous (plusieurs)', 'أنتم', 'you (plural)') },
+  { id: 'tamen', hz: '他们', py: 'tāmen', m: T('ils, eux', 'هم', 'they (male or mixed)') },
+  { id: 'tamenf', hz: '她们', py: 'tāmen', m: T('elles', 'هنّ', 'they (female)') },
+  { id: 'nin', hz: '您', py: 'nín', m: T('vous (politesse)', 'حضرتك', 'you (polite)') },
+  { id: 'ninhao', hz: '您好', py: 'nín hǎo', m: T('bonjour (poli)', 'مرحبًا (باحترام)', 'hello (polite)') },
+  { id: 'qu', hz: '去', py: 'qù', m: T('aller', 'يذهب', 'to go') },
+  { id: 'xihuan', hz: '喜欢', py: 'xǐhuan', m: T('aimer bien', 'يحبّ، يُعجبه', 'to like') },
+  { id: 'ai', hz: '爱', py: 'ài', m: T('aimer (fort)', 'يحبّ (حبًّا كبيرًا)', 'to love') },
+  { id: 'dui', hz: '对', py: 'duì', m: T('c’est juste, oui', 'صحيح، نعم', 'right, yes') },
+  { id: 'budui', hz: '不对', py: 'bú duì', m: T('ce n’est pas juste, non', 'غير صحيح، لا', 'wrong, no') },
+  { id: 'zhen', hz: '真', py: 'zhēn', m: T('vraiment', 'حقًّا', 'really') },
+  { id: 'renshi', hz: '认识', py: 'rènshi', m: T('connaître (quelqu’un)', 'يعرف (شخصًا)', 'to know (someone)') },
+  { id: 'gaoxing', hz: '高兴', py: 'gāoxìng', m: T('content(e)', 'سعيد، مسرور', 'glad, happy') },
+  { id: 'dou', hz: '都', py: 'dōu', m: T('tous', 'كلّهم، جميعًا', 'all') },
+  { id: 'zhe', hz: '这', py: 'zhè', m: T('ce, ceci', 'هذا', 'this') },
+  { id: 'shu', hz: '书', py: 'shū', m: T('livre', 'كتاب', 'book') },
+  { id: 'hanyu', hz: '汉语', py: 'Hànyǔ', m: T('le chinois (langue)', 'اللغة الصينية', 'Chinese (language)') },
+  { id: 'zhongwen', hz: '中文', py: 'Zhōngwén', m: T('le chinois (= 汉语)', 'الصينية (= 汉语)', 'Chinese (= 汉语)') },
+  { id: 'xing', hz: '姓', py: 'xìng', m: T('nom de famille ; s’appeler (nom)', 'اسم العائلة', 'family name; be surnamed') },
+  { id: 'yue', hz: '月', py: 'yuè', m: T('lune, mois', 'قمر، شهر', 'moon, month') },
 ];
 
 /* ---------- Sentences ---------- */
@@ -151,6 +229,47 @@ export const SENTENCES = [
     m: T('Je t’invite.', 'أنا أدعوك.', 'I invite you (my treat).') },
   { id: 's_niwenta', hz: '你问她。', py: 'Nǐ wèn tā.', tiles: ['你', '问', '她'],
     m: T('Tu lui demandes (à elle).', 'أنت تسألها.', 'You ask her.') },
+  // ---- lesson 1 of the course, and more of lesson 2 ----
+  { id: 's_nihao', hz: '你好!', py: 'Nǐ hǎo!', tiles: ['你', '好'],
+    m: T('Bonjour !', 'مرحبًا!', 'Hello!') },
+  { id: 's_nihaoma', hz: '你好吗?', py: 'Nǐ hǎo ma?', tiles: ['你', '好', '吗'],
+    m: T('Comment vas-tu ?', 'كيف حالك؟', 'How are you?') },
+  { id: 's_wohenhao', hz: '我很好,你呢?', py: 'Wǒ hěn hǎo, nǐ ne?', tiles: ['我', '很', '好', '你', '呢'],
+    m: T('Je vais très bien, et toi ?', 'أنا بخير، وأنت؟', 'I’m very well, and you?') },
+  { id: 's_woyehenhao', hz: '我也很好。', py: 'Wǒ yě hěn hǎo.', tiles: ['我', '也', '很', '好'],
+    m: T('Moi aussi, je vais très bien.', 'وأنا أيضًا بخير.', 'I’m very well too.') },
+  { id: 's_womenhao', hz: '我们很好。', py: 'Wǒmen hěn hǎo.', tiles: ['我们', '很', '好'],
+    m: T('Nous allons très bien.', 'نحن بخير.', 'We are very well.') },
+  { id: 's_tamenhao', hz: '她们也很好。', py: 'Tāmen yě hěn hǎo.', tiles: ['她们', '也', '很', '好'],
+    m: T('Elles aussi vont très bien.', 'وهنّ أيضًا بخير.', 'They are very well too.') },
+  { id: 's_ninhao', hz: '您好!', py: 'Nín hǎo!', tiles: ['您', '好'],
+    m: T('Bonjour ! (poli)', 'مرحبًا! (باحترام)', 'Hello! (polite)') },
+  { id: 's_gaoxing', hz: '我很高兴认识你。', py: 'Wǒ hěn gāoxìng rènshi nǐ.', tiles: ['我', '很', '高兴', '认识', '你'],
+    m: T('Je suis très content(e) de te connaître.', 'أنا سعيد جدًّا بالتعرّف عليك.', 'I’m very glad to meet you.') },
+  { id: 's_woquzg', hz: '我去中国。', py: 'Wǒ qù Zhōngguó.', tiles: ['我', '去', '中国'],
+    m: T('Je vais en Chine.', 'أنا ذاهب إلى الصين.', 'I’m going to China.') },
+  { id: 's_xihuan', hz: '我喜欢汉语。', py: 'Wǒ xǐhuan Hànyǔ.', tiles: ['我', '喜欢', '汉语'],
+    m: T('J’aime le chinois.', 'أحبّ اللغة الصينية.', 'I like Chinese.') },
+  { id: 's_tasheim', hz: '他是谁?', py: 'Tā shì shéi?', tiles: ['他', '是', '谁'],
+    m: T('Qui est-il ?', 'من هو؟', 'Who is he?') },
+  { id: 's_tasami', hz: '他是萨米。', py: 'Tā shì Sàmǐ.', tiles: ['他', '是', '萨米'],
+    m: T('C’est Sami.', 'هو سامي.', 'He is Sami.') },
+  { id: 's_zheshi', hz: '这是什么?', py: 'Zhè shì shénme?', tiles: ['这', '是', '什么'],
+    m: T('Qu’est-ce que c’est ?', 'ما هذا؟', 'What is this?') },
+  { id: 's_zheshu', hz: '这是书。', py: 'Zhè shì shū.', tiles: ['这', '是', '书'],
+    m: T('C’est un livre.', 'هذا كتاب.', 'This is a book.') },
+  { id: 's_dou1', hz: '我很不高兴。', py: 'Wǒ hěn bù gāoxìng.', tiles: ['我', '很', '不', '高兴'],
+    m: T('Je suis très mécontent(e).', 'أنا مستاء جدًّا.', 'I am very unhappy.') },
+  { id: 's_dou2', hz: '我不很高兴。', py: 'Wǒ bù hěn gāoxìng.', tiles: ['我', '不', '很', '高兴'],
+    m: T('Je ne suis pas très content(e).', 'لست سعيدًا جدًّا.', 'I am not very happy.') },
+  { id: 's_dou3', hz: '我们都不高兴。', py: 'Wǒmen dōu bù gāoxìng.', tiles: ['我们', '都', '不', '高兴'],
+    m: T('Aucun de nous n’est content.', 'كلّنا غير سعداء.', 'None of us is happy.') },
+  { id: 's_dou4', hz: '我们都不很高兴。', py: 'Wǒmen dōu bù hěn gāoxìng.', tiles: ['我们', '都', '不', '很', '高兴'],
+    m: T('Aucun de nous n’est très content.', 'كلّنا لسنا سعداء جدًّا.', 'None of us is very happy.') },
+  { id: 's_dou5', hz: '我们不都很高兴。', py: 'Wǒmen bù dōu hěn gāoxìng.', tiles: ['我们', '不', '都', '很', '高兴'],
+    m: T('Nous ne sommes pas tous très contents.', 'لسنا كلّنا سعداء جدًّا.', 'Not all of us are very happy.') },
+  { id: 's_dou6', hz: '我们也不都很高兴。', py: 'Wǒmen yě bù dōu hěn gāoxìng.', tiles: ['我们', '也', '不', '都', '很', '高兴'],
+    m: T('Nous non plus, nous ne sommes pas tous très contents.', 'ونحن أيضًا لسنا كلّنا سعداء جدًّا.', 'We are not all very happy either.') },
 ];
 
 /* ---------- The dialogue of the lesson ---------- */
@@ -169,6 +288,17 @@ export const SPEAKERS = {
   sami: { hz: '萨米', py: 'Sàmǐ', color: 'var(--jade)' },
   xiaomei: { hz: '小美', py: 'Xiǎoměi', color: 'var(--red)' },
   mali: { hz: '玛丽', py: 'Mǎlì', color: 'var(--gold)' },
+};
+// The first dialogue of the course: saying hello.
+export const HELLO = [
+  { who: 'sami', s: 's_nihao', hz: '你好!', py: 'Nǐ hǎo!', m: T('Bonjour !', 'مرحبًا!', 'Hello!') },
+  { who: 'xiaomei', s: 's_h2', hz: '你好!你好吗?', py: 'Nǐ hǎo! Nǐ hǎo ma?', m: T('Bonjour ! Comment vas-tu ?', 'مرحبًا! كيف حالك؟', 'Hello! How are you?') },
+  { who: 'sami', s: 's_wohenhao', hz: '我很好,你呢?', py: 'Wǒ hěn hǎo, nǐ ne?', m: T('Je vais très bien, et toi ?', 'أنا بخير، وأنت؟', 'I’m very well, and you?') },
+  { who: 'xiaomei', s: 's_woyehenhao', hz: '我也很好。', py: 'Wǒ yě hěn hǎo.', m: T('Moi aussi, très bien.', 'وأنا أيضًا بخير.', 'Very well too.') },
+];
+export const DIALOGUES = {
+  main: { lines: DIALOGUE, title: '你是哪国人?', done: 'dlg' },
+  hello: { lines: HELLO, title: '你好!', done: 'dlg0' },
 };
 
 /* ---------- Grammar notes (重点词语注脚) ---------- */
@@ -215,6 +345,55 @@ export const GRAMMAR = [
       '请 (يدعو، يرجو) + 问 (يسأل): عبارة مهذّبة قبل طلب معلومة، مثل «من فضلك…».',
       '请 (to invite, to beg) + 问 (to ask): a polite formula before asking something, like "excuse me…".'),
     ok: ['请问,你是哪国人?'], ko: [] },
+  // ---- lesson 1 of the course, and more of lesson 2 ----
+  { id: 'g_hen', title: T('很 hěn devant l’adjectif', '很 hěn قبل الصفة', '很 hěn before an adjective'),
+    body: T(
+      'Devant un adjectif (好, 高兴…), on ne met pas 是 : on met 很. 我很好 = je vais (très) bien. 我是好 est faux. 很 se dit léger, il veut parfois juste dire « bien ».',
+      'قبل الصفة (好، 高兴…) لا نضع 是 بل نضع 很: 我很好 = أنا بخير. أمّا 我是好 فخطأ. تُنطق 很 خفيفة، وأحيانًا لا تعني «جدًّا» بقوّة.',
+      'Before an adjective (好, 高兴…) you do not use 是: you use 很. 我很好 = I am (very) well. 我是好 is wrong. 很 is said lightly; often it just links.'),
+    ok: ['我很好。', '我很高兴。'], ko: ['我是好。'] },
+  { id: 'g_men', title: T('们 men : le pluriel', '们 men: الجمع', '们 men: the plural'),
+    body: T(
+      'On ajoute 们 (ton neutre) aux pronoms : 我 → 我们 (nous), 你 → 你们 (vous), 他 → 他们 (ils), 她 → 她们 (elles). Un groupe de garçons et de filles : 他们.',
+      'نضيف 们 (بنغمة محايدة) إلى الضمائر: 我 ← 我们 (نحن)، 你 ← 你们 (أنتم)، 他 ← 他们 (هم)، 她 ← 她们 (هنّ). مجموعة من الأولاد والبنات: 他们.',
+      'Add 们 (neutral tone) to pronouns: 我 → 我们 (we), 你 → 你们 (you all), 他 → 他们 (they), 她 → 她们 (they, girls). A mixed group: 他们.'),
+    ok: ['我们', '你们', '他们', '她们'], ko: [] },
+  { id: 'g_ta', title: T('他 ou 她 ? Même son : tā', '他 أم 她؟ الصوت نفسه: tā', '他 or 她? Same sound: tā'),
+    body: T(
+      'À l’oral on ne les distingue pas : les deux se disent tā. À l’écrit : 亻(personne) pour un homme, 女 (femme) pour une femme.',
+      'في الكلام لا فرق بينهما: كلاهما يُنطق tā. وفي الكتابة: 亻(شخص) للمذكّر و女 (امرأة) للمؤنّث.',
+      'Spoken, you cannot tell them apart: both are tā. Written: 亻(person) for a man, 女 (woman) for a woman.'),
+    ok: ['他是萨米。', '她是玛丽。'], ko: [] },
+  { id: 'g_nin', title: T('您 nín : le vous de politesse', '您 nín: صيغة الاحترام', '您 nín: the polite you'),
+    body: T(
+      '您 = 你 + 心 (le cœur). On le dit au professeur ou à une personne âgée : 您好! Il n’a pas de pluriel 您们 à l’oral.',
+      '您 = 你 + 心 (القلب). نقولها للأستاذ أو لشخص كبير في السنّ: 您好! ولا نقول 您们 في الكلام عادةً.',
+      '您 = 你 + 心 (heart). Say it to the teacher or an older person: 您好! There is normally no spoken plural 您们.'),
+    ok: ['您好!'], ko: [] },
+  { id: 'g_dou', title: T('都 dōu et la place de 不', '都 dōu وموضع 不', '都 dōu and where 不 goes'),
+    body: T(
+      '都 (tous) se place après le sujet, devant le verbe. La place de 不 change le sens : 都不 = aucun (我们都不高兴), 不都 = pas tous (我们不都很高兴). Pareil avec 很 : 很不高兴 = très mécontent, 不很高兴 = pas très content.',
+      'توضع 都 (كلّ) بعد الفاعل وقبل الفعل. ومكان 不 يغيّر المعنى: 都不 = لا أحد (我们都不高兴)، و不都 = ليس الجميع (我们不都很高兴). وكذلك مع 很: 很不高兴 = مستاء جدًّا، و不很高兴 = لست سعيدًا جدًّا.',
+      '都 (all) goes after the subject, before the verb. Where 不 goes changes the meaning: 都不 = none (我们都不高兴), 不都 = not all (我们不都很高兴). Same with 很: 很不高兴 = very unhappy, 不很高兴 = not very happy.'),
+    ok: ['我们都不高兴。', '我们不都很高兴。'], ko: ['都我们高兴。'] },
+  { id: 'g_zhe', title: T('这是什么? — la question reste à sa place', '这是什么؟ — السؤال يبقى في مكانه', '这是什么? — the question word stays put'),
+    body: T(
+      'Comme 谁, 什么 se met là où sera la réponse : 这是什么? → 这是书。 Pas de 吗 avec 什么 ou 谁.',
+      'مثل 谁، توضع 什么 في مكان الجواب: 这是什么؟ ← 这是书。 ولا نضيف 吗 مع 什么 أو 谁.',
+      'Like 谁, 什么 goes where the answer will be: 这是什么? → 这是书。 No 吗 with 什么 or 谁.'),
+    ok: ['这是什么?', '这是书。'], ko: ['这是什么吗?'] },
+  { id: 'g_xihuan', title: T('喜欢 ou 爱 ?', '喜欢 أم 爱؟', '喜欢 or 爱?'),
+    body: T(
+      'Les deux veulent dire « aimer », mais 喜欢 (xǐhuan) = aimer bien, apprécier (une langue, un pays), et 爱 (ài) = aimer fort (sa famille, son pays).',
+      'كلاهما يعني «يحبّ»، لكنّ 喜欢 (xǐhuan) = يُعجبه، يحبّ (لغة، بلدًا)، و爱 (ài) = يحبّ حبًّا كبيرًا (عائلته، وطنه).',
+      'Both mean "to love/like", but 喜欢 (xǐhuan) = to like (a language, a country) and 爱 (ài) = to love deeply (family, homeland).'),
+    ok: ['我喜欢汉语。'], ko: [] },
+  { id: 'g_dui', title: T('对 duì / 不对 bú duì', '对 duì / 不对 bú duì', '对 duì / 不对 bú duì'),
+    body: T(
+      'Pour dire « oui, c’est ça » : 对!  « Non, ce n’est pas ça » : 不对。 Pour répondre à une question avec 是, on peut aussi dire 是 / 不是。',
+      'لنقول «نعم، صحيح»: 对!  و«لا، غير صحيح»: 不对。 وللإجابة عن سؤال فيه 是 نقول أيضًا 是 / 不是。',
+      'To say "yes, right": 对!  "No, that’s not it": 不对。 To answer a question with 是 you can also say 是 / 不是。'),
+    ok: ['对!', '不对。'], ko: [] },
 ];
 
 // How a word really sounds when its pinyin letters mislead a French or Arabic reader
@@ -223,32 +402,17 @@ export const SOUNDS_LIKE = {
   'hǎo': T('se dit « khao »', 'تُنطق «خاو»', 'say "khao"'),
   'hǎo rén': T('se dit « khao jen »', 'تُنطق «خاو جَن»', 'say "khao jen"'),
   'rén': T('se dit « jen » (j de « je »)', 'تُنطق «جَن» (ج الفرنسية j)', 'say "jen" (French j)'),
+  'nǐ hǎo': T('se dit « ní khao » (deux 3ᵉ tons : le 1ᵉʳ monte)', 'تُنطق «ني خاو» (نغمتان ثالثتان: الأولى تصعد)', 'say "ní khao" (two 3rd tones: the first rises)'),
+  'nǐ hǎo ma': T('se dit « ní khao ma »', 'تُنطق «ني خاو ما»', 'say "ní khao ma"'),
+  'hěn': T('se dit « khen »', 'تُنطق «خِن»', 'say "khen"'),
+  'hěn hǎo': T('se dit « khén khao » (le 1ᵉʳ monte)', 'تُنطق «خِن خاو» (الأولى تصعد)', 'say "khén khao" (the first rises)'),
+  'nín hǎo': T('se dit « nine khao »', 'تُنطق «نين خاو»', 'say "neen khao"'),
+  'Hànyǔ': T('se dit « khane-yu » (u français)', 'تُنطق «خان يو» (u الفرنسية)', 'say "khan-yü" (French u)'),
+  'xǐhuan': T('se dit « chi-khouane » (langue à plat)', 'تُنطق «شي خوان» (اللسان مسطّح)', 'say "shee-khwan" (tongue flat)'),
+  'rènshi': T('se dit « jeune-che », le 2ᵉ léger', 'تُنطق «جِن شِ»، والثاني خفيف', 'say "jen-sh", the 2nd light'),
+  'qù': T('« tchu » avec un souffle, u français', '«تشو» مع نفَس، و u فرنسية', '"chü" with a puff, French u'),
 };
 
-/* ---------- Pinyin of the lesson (语音概要) ---------- */
-export const INITIALS = [
-  { s: 'b', ex: 'bu4', h: T('Non aspiré : comme le « p » français, sans souffle.', 'غير مهموس: مثل «p» الفرنسية دون نفخة هواء.', 'Unaspirated: like the "p" in "spy", no puff of air.') },
-  { s: 'p', ex: 'peng2', h: T('Aspiré : « p » avec un souffle (p’h).', 'مهموس: «p» مع نفخة هواء (p’h).', 'Aspirated: "p" with a strong puff of air.') },
-  { s: 'f', ex: 'fa3', h: T('Comme le « f » français.', 'مثل «ف» العربية.', 'Like English "f".') },
-  { s: 'h', ex: 'hao3', h: T('Raclé au fond de la gorge, comme la « خ » arabe (kh) ou la jota espagnole, en plus doux : hǎo ≈ « khao ».', 'من الحلق مثل «خ» العربية لكن أخفّ: hǎo ≈ «خاو».', 'From the back of the throat, like Arabic خ or the "ch" in Scottish "loch", but softer: hǎo ≈ "khao".') },
-  { s: 't', ex: 'ta1', h: T('Aspiré : « t » avec un souffle (t’h).', 'مهموس: «ت» مع نفخة هواء.', 'Aspirated: "t" with a puff of air.') },
-  { s: 'q', ex: 'qing3', h: T('« tch » avec un souffle, langue contre le palais.', '«تش» مع نفخة هواء، واللسان على الحنك.', '"ch" with a puff of air, tongue flat against the palate.') },
-  { s: 'r', ex: 'ren2', h: T('Entre le « j » français et le « r » anglais.', 'بين «ج» الفرنسية (j) و«r» الإنجليزية.', 'Between French "j" and English "r".') },
-  { s: 'y', ex: 'ye3', h: T('Comme le « y » de « yeux ».', 'مثل «ي» في «يد».', 'Like the "y" in "yes".') },
-  { s: 'z', ex: 'zi4', h: T('Se prononce « dz ».', 'تُنطق «دز».', 'Pronounced "dz".') },
-  { s: 'sh', ex: 'shi4', h: T('Comme « ch » en français, langue recourbée.', 'مثل «ش» مع ثني اللسان إلى الخلف.', 'Like English "sh", tongue curled back.') },
-  { s: 'zh', ex: 'zhong1', h: T('Comme « dj » dans « Djerba », langue recourbée.', 'مثل «دج» في «جربة»، مع ثني اللسان.', 'Like "j" in "jungle", tongue curled back.') },
-];
-export const FINALS = [
-  { s: '-i', ex: 'shi4', h: T('Voyelle sourde après z, c, s, zh, ch, sh, r : on prolonge la consonne.', 'صائت خافت بعد z, c, s, zh, ch, sh, r: نمدّ الحرف الساكن.', 'A "buzzed" vowel after z, c, s, zh, ch, sh, r: just prolong the consonant.') },
-  { s: 'u', ex: 'bu4', h: T('Comme « ou » en français. Seul, il s’écrit wu.', 'مثل «و» الممدودة (ou). وحده يُكتب wu.', 'Like "oo" in "food". Alone it is written wu.') },
-  { s: 'ü', ex: 'nv3', h: T('Comme le « u » français. Après j, q, x, y on écrit u sans tréma.', 'مثل «u» الفرنسية. بعد j, q, x, y تُكتب u بلا نقطتين.', 'Like French "u" / German "ü". After j, q, x, y it is written u.') },
-  { s: 'ou', ex: 'you3', h: T('« o » qui se ferme en « ou ».', '«o» تنغلق إلى «ou».', 'Like "oh" gliding to "oo".') },
-  { s: 'uo', ex: 'guo2', h: T('« ou » qui s’ouvre en « o ». Seul, il s’écrit wo.', '«ou» تنفتح إلى «o». وحده يُكتب wo.', '"oo" opening to "o". Alone it is written wo.') },
-  { s: 'en', ex: 'ren2', h: T('Nasale où on prononce le « n », comme dans « Ben ».', 'أنفي يُنطق فيه «ن»، مثل «بن».', 'Nasal with a clear "n", like "un" in "under".') },
-  { s: 'eng', ex: 'peng2', h: T('Nasale sans prononcer « n » ni « g », comme « lent ».', 'أنفي دون نطق «ن» أو «غ»، مثل «lent» الفرنسية.', 'Nasal, no "n" or "g" sound, like "ung" in "sung".') },
-  { s: 'ong', ex: 'zhong1', h: T('Nasale comme dans « long » en français.', 'أنفي مثل «long» الفرنسية.', 'Nasal, like "oong".') },
-];
 // Syllables of the lesson with the tones that exist (听述三)
 export const TONE_ROWS = [
   ['shi', '1234'], ['na', '1234'], ['guo', '1234'], ['ren', '234'], ['tu', '1234'], ['si', '134'],
@@ -263,34 +427,120 @@ export const TONES = [
   { n: 4, mark: 'à', name: T('4ᵉ ton', 'النغمة الرابعة', '4th tone'), d: T('Tombe sec, comme un ordre : « Non ! ».', 'تسقط بحدّة، كأمر: «لا!».', 'Falls sharply, like an order: "No!".') },
   { n: 0, mark: 'a', name: T('Ton neutre', 'النغمة المحايدة', 'Neutral tone'), d: T('Court et léger : ma, ne, me, zi…', 'قصيرة وخفيفة: ma، ne، me، zi…', 'Short and light: ma, ne, me, zi…') },
 ];
+// How tones and spellings change when syllables meet.
 export const SANDHI = [
+  { id: 'sd_u', title: T('ü après j, q, x, y', 'ü بعد j وq وx وy', 'ü after j, q, x, y'),
+    body: T('Après j, q, x et y, on écrit u sans les deux points, mais on dit toujours ü (le « u » français) : 去 qù, 语 yǔ, 月 yuè. Après n et l on garde les points : 女 nǚ.', 'بعد j وq وx وy نكتب u بلا نقطتين، لكنّنا ننطقها دائمًا ü (u الفرنسية): 去 qù، 语 yǔ، 月 yuè. وبعد n وl نُبقي النقطتين: 女 nǚ.', 'After j, q, x and y you write u without the dots, but you still say ü (French "u"): 去 qù, 语 yǔ, 月 yuè. After n and l the dots stay: 女 nǚ.'),
+    ex: [['去', 'qù', 'qu'], ['汉语', 'Hànyǔ', 'hanyu'], ['月', 'yuè', 'yue']] },
+  { id: 'sd_33', title: T('3ᵉ + 3ᵉ → 2ᵉ + 3ᵉ', 'النغمتان ⁦3 + 3 → 2 + 3⁩', '3rd + 3rd → 2nd + 3rd'),
+    body: T('Quand deux 3ᵉ tons se suivent, le premier se dit au 2ᵉ ton (il monte). On n’écrit pas le changement : on écrit nǐ hǎo, on dit ní hǎo. Avec trois 3ᵉ tons (我很好), seul le dernier garde son 3ᵉ ton : wó hén hǎo.', 'إذا تتابعت نغمتان ثالثتان تُنطق الأولى بالنغمة الثانية (تصعد). ولا نكتب هذا التغيير: نكتب nǐ hǎo ونقول ní hǎo. ومع ثلاث نغمات ثالثة (我很好) يحتفظ الأخير فقط بنغمته: wó hén hǎo.', 'When two 3rd tones meet, the first is said as a 2nd tone (it rises). The change is not written: you write nǐ hǎo, you say ní hǎo. With three 3rd tones (我很好) only the last keeps its 3rd tone: wó hén hǎo.'),
+    ex: [['你好', 'nǐ hǎo → ní hǎo', 'nihao'], ['很好', 'hěn hǎo → hén hǎo', 'henhao'], ['我也很好。', 'wǒ yě hěn hǎo → wó yé hén hǎo', 's_woyehenhao']] },
   { id: 'sd_bu', title: T('不 + 4ᵉ ton → bú', '不 + النغمة الرابعة ← bú', '不 + 4th tone → bú'),
-    body: T('Devant un 4ᵉ ton, 不 (bù) passe au 2ᵉ ton.', 'قبل النغمة الرابعة تتحوّل 不 (bù) إلى النغمة الثانية.', 'Before a 4th tone, 不 (bù) switches to the 2nd tone.'),
-    ex: [['不是', 'bù + shì → bú shì', 'bushi']] },
+    body: T('Devant un 4ᵉ ton, 不 (bù) passe au 2ᵉ ton, et on l’écrit : bú shì, bú duì. Attention : ce n’est vrai que pour 不 (et 一). Deux 4ᵉ tons ordinaires ne changent pas : 这是 zhè shì.', 'قبل النغمة الرابعة تتحوّل 不 (bù) إلى النغمة الثانية ونكتبها هكذا: bú shì، bú duì. انتبه: هذا خاصّ بـ 不 (و一) فقط. أمّا نغمتان رابعتان عاديّتان فلا تتغيّران: 这是 zhè shì.', 'Before a 4th tone, 不 (bù) switches to the 2nd tone, and it is written: bú shì, bú duì. Careful: only 不 (and 一) do this. Two ordinary 4th tones do not change: 这是 zhè shì.'),
+    ex: [['不是', 'bù + shì → bú shì', 'bushi'], ['不对', 'bù + duì → bú duì', 'budui'], ['这是书。', 'zhè shì shū', 's_zheshu']] },
   { id: 'sd_half3', title: T('Le demi-3ᵉ ton', 'نصف النغمة الثالثة', 'The half third tone'),
-    body: T('Devant un 1ᵉʳ, 2ᵉ ou 4ᵉ ton, le 3ᵉ ton reste grave et ne remonte pas.', 'قبل النغمة الأولى أو الثانية أو الرابعة تبقى النغمة الثالثة منخفضة ولا تصعد.', 'Before a 1st, 2nd or 4th tone, the 3rd tone stays low and does not rise.'),
-    ex: [['女朋友', 'nǚ + péngyou', 'nvpengyou'], ['好人', 'hǎo + rén', 'haoren']] },
+    body: T('Devant un 1ᵉʳ, 2ᵉ ou 4ᵉ ton (ou un ton neutre), le 3ᵉ ton descend et reste en bas : il ne remonte pas. Ce n’est pas un 4ᵉ ton : le 4ᵉ tombe d’en haut, le demi-3ᵉ reste grave.', 'قبل النغمة الأولى أو الثانية أو الرابعة (أو المحايدة) تنزل النغمة الثالثة وتبقى منخفضة ولا تصعد. ليست نغمة رابعة: الرابعة تسقط من الأعلى، ونصف الثالثة تبقى منخفضة.', 'Before a 1st, 2nd or 4th tone (or a neutral tone), the 3rd tone dips and stays low: it does not rise again. It is not a 4th tone: the 4th falls from high, the half 3rd stays low.'),
+    ex: [['法国', 'Fǎ + guó', 'faguo'], ['你们', 'nǐ + men', 'nimen'], ['女朋友', 'nǚ + péngyou', 'nvpengyou'], ['好人', 'hǎo + rén', 'haoren']] },
   { id: 'sd_neutral', title: T('Le ton neutre (轻声)', 'النغمة المحايدة (轻声)', 'The neutral tone (轻声)'),
     body: T('Certaines syllabes perdent leur ton : me dans shénme, zi dans míngzi, you dans péngyou, ma à la fin d’une question. Dans « A 是 B », 是 se lit aussi légèrement.', 'بعض المقاطع تفقد نغمتها: me في shénme، zi في míngzi، you في péngyou، و ma في آخر السؤال. وفي «A 是 B» تُنطق 是 خفيفة أيضًا.', 'Some syllables lose their tone: me in shénme, zi in míngzi, you in péngyou, ma at the end of a question. In "A 是 B", 是 is also read lightly.'),
     ex: [['什么', 'shénme', 'shenme'], ['名字', 'míngzi', 'mingzi'], ['朋友', 'péngyou', 'pengyou']] },
 ];
+
+/* ---------- Every sound of Chinese: 21 consonants, 36 vowels (语音概要) ---------- */
+// s: the pinyin letters · ex / py: an example word, heard in the voice of the lessons
+// say: how it really sounds, for someone who speaks French or Arabic
+const S_ = (s, ex, py, fr, ar, en) => ({ s, ex, py, say: T(fr, ar, en) });
+export const SOUND_CHART = {
+  initials: [
+    S_('b', '八', 'bā', '« p » sans souffle, presque « b ».', '«p» بلا نفَس، تقترب من «ب».', '"p" with no puff of air, close to "b".'),
+    S_('p', '朋', 'péng', '« p » avec un souffle (mets la main devant la bouche : tu le sens).', '«p» مع نفخة هواء (ضع يدك أمام فمك لتحسّ بها).', '"p" with a puff of air (hand in front of your mouth).'),
+    S_('m', '美', 'měi', '« m ».', '«م».', '"m".'),
+    S_('f', '法', 'fǎ', '« f ».', '«ف».', '"f".'),
+    S_('d', '对', 'duì', '« t » sans souffle, presque « d ».', '«ت» بلا نفَس، تقترب من «د».', '"t" with no puff, close to "d".'),
+    S_('t', '他', 'tā', '« t » avec un souffle.', '«ت» مع نفخة هواء.', '"t" with a puff of air.'),
+    S_('n', '你', 'nǐ', '« n ».', '«ن».', '"n".'),
+    S_('l', '来', 'lái', '« l ».', '«ل».', '"l".'),
+    S_('g', '高', 'gāo', '« k » sans souffle, presque « g ».', '«ك» بلا نفَس، تقترب من «ڨ».', '"k" with no puff, close to "g".'),
+    S_('k', '口', 'kǒu', '« k » avec un souffle. Ce n’est pas la خ : la خ, c’est le h.', '«ك» مع نفخة هواء. ليست «خ»: الـ«خ» هي h.', '"k" with a puff of air. It is not خ (that is h).'),
+    S_('h', '好', 'hǎo', 'La خ arabe, plus douce : 好 = « khao ».', '«خ» العربية لكن أخفّ: 好 = «خاو».', 'Arabic خ, softer: 好 = "khao".'),
+    S_('j', '叫', 'jiào', '« dj » doux, la langue à plat derrière les dents du bas, sans souffle.', '«دج» ليّنة، واللسان مسطّح خلف الأسنان السفلى، بلا نفَس.', 'Soft "j", tongue flat behind the lower teeth, no puff.'),
+    S_('q', '去', 'qù', '« tch » avec un souffle, la langue à plat.', '«تش» مع نفَس، واللسان مسطّح.', '"ch" with a puff, tongue flat.'),
+    S_('x', '喜', 'xǐ', '« ch » très doux, en souriant, langue à plat : entre « s » et « ch ».', '«ش» ليّنة جدًّا مع ابتسامة، واللسان مسطّح: بين «س» و«ش».', 'A very soft "sh" while smiling, tongue flat: between "s" and "sh".'),
+    S_('zh', '中', 'zhōng', '« dj », la langue recourbée vers l’arrière, sans souffle.', '«دج» مع ثني اللسان إلى الخلف، بلا نفَس.', '"j" with the tongue curled back, no puff.'),
+    S_('ch', '吃', 'chī', '« tch » avec un souffle, langue recourbée.', '«تش» مع نفَس، واللسان مثنيّ إلى الخلف.', '"ch" with a puff, tongue curled back.'),
+    S_('sh', '是', 'shì', '« ch » français, langue recourbée.', '«ش» مع ثني اللسان إلى الخلف.', '"sh" with the tongue curled back.'),
+    S_('r', '人', 'rén', 'Le « j » de « je », langue recourbée : 人 = « jen ».', 'مثل j الفرنسية في «je» مع ثني اللسان: 人 = «جَن».', 'The French "j" of "je", tongue curled back: 人 = "jen".'),
+    S_('z', '字', 'zì', '« dz » sans souffle.', '«دز» بلا نفَس.', '"dz" with no puff.'),
+    S_('c', '菜', 'cài', '« ts » avec un souffle.', '«تس» مع نفخة هواء.', '"ts" with a puff of air.'),
+    S_('s', '斯', 'sī', '« s ».', '«س».', '"s".'),
+  ],
+  finals: [
+    S_('a', '八', 'bā', '« a ».', '«ا» مفتوحة.', '"a" as in "father".'),
+    S_('o', '波', 'bō', '« o » ; après b, p, m, f on entend « wo » : bō ≈ « bwo ».', '«o»؛ وبعد b وp وm وf نسمع «وو»: bō ≈ «بوو».', '"o"; after b p m f you hear "wo": bō ≈ "bwo".'),
+    S_('e', '饿', 'è', 'Pas un « é » : un « eu » qui sort du fond de la gorge.', 'ليست «é»: إنّها «أُ» تخرج من آخر الحلق.', 'Not "é": an "uh" from the back of the throat.'),
+    S_('i', '一', 'yī', '« i ».', '«ي».', '"ee".'),
+    S_('-i', '是', 'shì', 'Après z, c, s, zh, ch, sh, r, le i ne se dit pas « i » : on prolonge la consonne. 是 ≠ « chi ».', 'بعد z وc وs وzh وch وsh وr لا تُنطق i «ي»: نمدّ الحرف الساكن فقط. 是 ليست «شي».', 'After z c s zh ch sh r, i is not "ee": you just stretch the consonant. 是 is not "shee".'),
+    S_('er', '二', 'èr', '« eur » en recourbant la langue.', '«أُر» مع ثني اللسان.', '"ur" with the tongue curled.'),
+    S_('ai', '爱', 'ài', '« aï ».', '«اي».', '"eye".'),
+    S_('ei', '美', 'měi', '« eï ».', '«ٍاي» قصيرة (ei).', '"ay".'),
+    S_('ao', '高', 'gāo', '« ao ».', '«او».', '"ow" as in "cow".'),
+    S_('ou', '口', 'kǒu', '« o » qui finit en « ou ».', '«o» تنتهي بـ«و».', '"oh".'),
+    S_('an', '汉', 'hàn', '« ane » : on entend le n (pas le « an » nasal du français).', '«آن»: نسمع النون (وليست «an» الفرنسية الأنفية).', '"ahn": you hear the n (not the French nasal "an").'),
+    S_('en', '人', 'rén', '« eune » : on entend le n (pas le « en » nasal du français).', '«أُن»: نسمع النون (وليست «en» الفرنسية الأنفية).', '"un" with a clear n (not the French nasal "en").'),
+    S_('ang', '忙', 'máng', '« an » français + un g très léger.', '«ان» الفرنسية مع «غ» خفيفة جدًّا.', '"ahng".'),
+    S_('eng', '朋', 'péng', '« eu » + ng : « eung ».', '«أُ» + ng: «أُنغ».', '"ung" as in "sung".'),
+    S_('ong', '中', 'zhōng', '« oung ».', '«ونغ».', '"oong".'),
+    S_('ia', '家', 'jiā', '« ya ».', '«يا».', '"yah".'),
+    S_('iao', '小', 'xiǎo', '« yao ».', '«ياو».', '"yow".'),
+    S_('ie', '也', 'yě', '« yé ».', '«يِه».', '"yeh".'),
+    S_('iu', '六', 'liù', '« yo-ou » (iu = iou).', '«يو» (iu = iou).', '"yo" (iu = iou).'),
+    S_('ian', '天', 'tiān', '« yène », pas « yan » : 天 = « tyène ».', '«يِن» وليست «يان»: 天 = «تيِن».', '"yen", not "yan": 天 = "tyen".'),
+    S_('in', '您', 'nín', '« ine » : i + n.', '«ين»: i + n.', '"een".'),
+    S_('iang', '两', 'liǎng', '« yang ».', '«يانغ».', '"yahng".'),
+    S_('ing', '请', 'qǐng', '« ing ».', '«ينغ».', '"ing".'),
+    S_('iong', '熊', 'xióng', '« yong ».', '«يونغ».', '"yoong".'),
+    S_('u', '不', 'bù', '« ou ».', '«و» ممدودة (ou).', '"oo".'),
+    S_('ua', '花', 'huā', '« wa ».', '«وا».', '"wah".'),
+    S_('uo', '国', 'guó', '« wo ».', '«وو».', '"waw".'),
+    S_('uai', '快', 'kuài', '« waï ».', '«واي».', '"why".'),
+    S_('ui', '对', 'duì', 'S’écrit ui, se dit « weï ».', 'تُكتب ui وتُنطق «وِي».', 'Written ui, said "way".'),
+    S_('uan', '欢', 'huān', '« wane ».', '«وان».', '"wahn".'),
+    S_('un', '春', 'chūn', '« wene » (un = uen).', '«وِن» (un = uen).', '"wun" (un = uen).'),
+    S_('uang', '王', 'wáng', '« wang ».', '«وانغ».', '"wahng".'),
+    S_('ueng', '翁', 'wēng', '« weng ».', '«وِنغ».', '"wung".'),
+    S_('ü', '女', 'nǚ', 'Le « u » français.', 'u الفرنسية (ضمّ الشفتين مع «ي»).', 'French "u" (say "ee" with rounded lips).'),
+    S_('üe', '月', 'yuè', '« u » français + « è » : 月 ≈ « yuè ».', 'u الفرنسية + «è»: 月 ≈ «يوِ».', 'French "u" + "eh": 月 ≈ "yweh".'),
+    S_('üan', '远', 'yuǎn', '« u » français + « ène » : 远 ≈ « yuène ».', 'u الفرنسية + «ِن»: 远 ≈ «يوِن».', 'French "u" + "en": 远 ≈ "ywen".'),
+    S_('ün', '云', 'yún', '« u » français + n : 云 ≈ « une ».', 'u الفرنسية + n: 云 ≈ «يُن».', 'French "u" + n: 云 ≈ "yün".'),
+  ],
+};
+// The clip of an example word: the lesson clip when the word or character already has one.
+export const exAudio = hz => WORD_BY_HZ[hz] ? 'w_' + WORD_BY_HZ[hz] : CHAR[hz] ? charAudio(hz) : 'x_' + hz.codePointAt(0).toString(16);
 
 /* ---------- Learning path ---------- */
 // kind: 'pinyin' opens the pinyin lab section, 'lesson' runs the lesson engine, 'dialogue' the role-play.
 export const PATH = [
   { id: 'p_tones', kind: 'pinyin', sec: 'tones', icon: 'wave', title: T('Les 4 tons', 'النغمات الأربع', 'The 4 tones'),
     sub: T('Écoute, imite, vois ta voix', 'استمع، قلّد، وشاهد صوتك', 'Listen, imitate, see your voice') },
+  { id: 'l0', kind: 'lesson', icon: 'smile', title: T('Bonjour !', 'مرحبًا!', 'Hello!'),
+    sub: T('你好 你好吗? 我很好', '你好 你好吗? 我很好', '你好 你好吗? 我很好'),
+    chars: ['你', '好', '吗', '很'], words: ['nihao', 'nihaoma', 'hen', 'henhao'], sents: ['s_nihao', 's_nihaoma', 's_wohenhao', 's_woyehenhao'], notes: ['g_hen'] },
+  { id: 'dlg0', kind: 'dialogue', dlg: 'hello', icon: 'chat', title: T('Dialogue : bonjour', 'حوار: مرحبًا', 'Dialogue: hello'),
+    sub: T('你好! 你好吗? 我也很好。', '你好! 你好吗? 我也很好。', '你好! 你好吗? 我也很好。') },
   { id: 'l1', kind: 'lesson', icon: 'user', title: T('Moi, toi, elle', 'أنا، أنت، هي', 'Me, you, her'),
     sub: T('我 你 她 是 人 好', '我 你 她 是 人 好', '我 你 她 是 人 好'),
     chars: ['人', '好', '她', '你', '我', '是'], words: ['wo', 'ni', 'ta', 'shi', 'ren', 'hao', 'haoren'], sents: [], notes: [] },
-  { id: 'p_sounds', kind: 'pinyin', sec: 'sounds', icon: 'ear', title: T('Les sons de la leçon', 'أصوات الدرس', 'Sounds of the lesson'),
-    sub: T('b p f t q r y z sh zh · u ü ou uo en eng ong', 'b p f t q r y z sh zh · u ü ou uo en eng ong', 'b p f t q r y z sh zh · u ü ou uo en eng ong') },
+  { id: 'l1b', kind: 'lesson', icon: 'users', title: T('Nous, vous, eux', 'نحن، أنتم، هم', 'We, you, they'),
+    sub: T('他 们 我们 你们 他们 她们', '他 们 我们 你们 他们 她们', '他 们 我们 你们 他们 她们'),
+    chars: ['他', '们'], words: ['tam', 'women', 'nimen', 'tamen', 'tamenf'], sents: ['s_womenhao', 's_tamenhao'], notes: ['g_ta', 'g_men'] },
+  { id: 'p_sounds', kind: 'pinyin', sec: 'sounds', icon: 'ear', title: T('Tous les sons', 'كلّ الأصوات', 'Every sound'),
+    sub: T('Consonnes et voyelles, un mot à écouter pour chacune', 'الحروف الساكنة والصائتة، مع كلمة لكلّ منها', 'Consonants and vowels, a word to hear for each') },
   { id: 'l2', kind: 'lesson', icon: 'globe', title: T('Les pays', 'البلدان', 'Countries'),
     sub: T('中国 法国 美国 突尼斯…', '中国 法国 美国 突尼斯…', '中国 法国 美国 突尼斯…'),
     chars: ['中', '国', '法', '美'], words: ['guo', 'zhongguo', 'faguo', 'meiguo', 'tunisi', 'zhongguoren', 'tunisiren', 'faguoren'], sents: ['s_wozg', 's_wotn', 's_wofg'], notes: ['g_guo'] },
   { id: 'l3', kind: 'lesson', icon: 'question', title: T('Tu es de quel pays ?', 'من أيّ بلد أنت؟', 'Where are you from?'),
     sub: T('你是哪国人? 你呢?', '你是哪国人? 你呢?', '你是哪国人? 你呢?'),
-    chars: ['哪', '呢'], words: ['na', 'naguo', 'naguoren', 'ne', 'nine', 'riben', 'ribenren', 'yindu', 'yinduren'], sents: ['s_nishi', 's_nine', 's_wotn'], notes: ['g_na'] },
+    chars: ['哪', '呢', '突', '尼', '斯'], words: ['na', 'naguo', 'naguoren', 'ne', 'nine', 'riben', 'ribenren', 'yindu', 'yinduren'], sents: ['s_nishi', 's_nine', 's_wotn'], notes: ['g_na'] },
   { id: 'l4', kind: 'lesson', icon: 'heart', title: T('Qui est-ce ?', 'من هذه؟', 'Who is she?'),
     sub: T('她是谁? 女朋友', '她是谁? 女朋友', '她是谁? 女朋友'),
     chars: ['女', '友', '朋', '谁'], words: ['shei', 'nv', 'pengyou', 'nvpengyou', 'wonvpengyou'], sents: ['s_tashei', 's_tanvpy'], notes: ['g_shei'] },
@@ -305,7 +555,19 @@ export const PATH = [
   { id: 'l7', kind: 'lesson', icon: 'plane', title: T('Encore des pays', 'بلدان أخرى', 'More countries'),
     sub: T('意大利 西班牙 德国 英国 澳大利亚', '意大利 西班牙 德国 英国 澳大利亚', '意大利 西班牙 德国 英国 澳大利亚'),
     chars: [], words: ['yidali', 'xibanya', 'deguo', 'yingguo', 'aodaliya', 'meiguoren'], sents: ['s_nishi', 's_wozg'], notes: [] },
-  { id: 'dlg', kind: 'dialogue', icon: 'chat', title: T('Le dialogue complet', 'الحوار الكامل', 'The full dialogue'),
+  { id: 'l8', kind: 'lesson', icon: 'heart', title: T('Aller, aimer', 'يذهب، يحبّ', 'Go, like, love'),
+    sub: T('去 喜欢 爱 对 真', '去 喜欢 爱 对 真', '去 喜欢 爱 对 真'),
+    chars: ['去', '喜', '欢', '爱', '对', '真'], words: ['qu', 'xihuan', 'ai', 'dui', 'budui', 'zhen'], sents: ['s_woquzg', 's_xihuan'], notes: ['g_xihuan', 'g_dui'] },
+  { id: 'l9', kind: 'lesson', icon: 'smile', title: T('Ravi de te connaître', 'سعيد بالتعرّف عليك', 'Nice to meet you'),
+    sub: T('您 高兴 认识 都', '您 高兴 认识 都', '您 高兴 认识 都'),
+    chars: ['您', '高', '兴', '认', '识', '都'], words: ['nin', 'ninhao', 'gaoxing', 'renshi', 'dou'], sents: ['s_ninhao', 's_gaoxing'], notes: ['g_nin'] },
+  { id: 'l9b', kind: 'lesson', icon: 'shuffle', title: T('都, 不, 很 : la bonne place', '都 و不 و很: المكان الصحيح', '都, 不, 很: the right place'),
+    sub: T('都不 · 不都 · 很不 · 不很', '都不 · 不都 · 很不 · 不很', '都不 · 不都 · 很不 · 不很'),
+    chars: [], words: ['women', 'dou', 'gaoxing'], sents: ['s_dou1', 's_dou2', 's_dou3', 's_dou4', 's_dou5', 's_dou6'], notes: ['g_dou'] },
+  { id: 'l10', kind: 'lesson', icon: 'book', title: T('C’est quoi ?', 'ما هذا؟', 'What is this?'),
+    sub: T('这 书 汉语 中文 姓 月', '这 书 汉语 中文 姓 月', '这 书 汉语 中文 姓 月'),
+    chars: ['这', '书', '汉', '语', '文', '姓', '月'], words: ['zhe', 'shu', 'hanyu', 'zhongwen', 'xing', 'yue'], sents: ['s_zheshi', 's_zheshu', 's_tasheim', 's_tasami'], notes: ['g_zhe'] },
+  { id: 'dlg', kind: 'dialogue', dlg: 'main', icon: 'chat', title: T('Le dialogue complet', 'الحوار الكامل', 'The full dialogue'),
     sub: T('Écoute, répète, joue un rôle', 'استمع، كرّر، ومثّل دورًا', 'Listen, repeat, play a role') },
   { id: 'p_table', kind: 'pinyin', sec: 'table', icon: 'grid', title: T('Le tableau du pinyin', 'جدول البينيين', 'The pinyin chart'),
     sub: T('Toutes les syllabes du chinois, avec le son', 'كلّ مقاطع الصينية مع الصوت', 'Every Chinese syllable, with sound') },
@@ -313,6 +575,7 @@ export const PATH = [
 
 /* ---------- Helpers ---------- */
 export const WORD = Object.fromEntries(WORDS.map(w => [w.id, w]));
+const WORD_BY_HZ = Object.fromEntries(WORDS.filter(w => [...w.hz].length === 1).map(w => [w.hz, w.id]));
 export const SENT = Object.fromEntries(SENTENCES.map(s => [s.id, s]));
 export const CHAR = Object.fromEntries(CHARS.map(c => [c.c, c]));
 export const NOTE = Object.fromEntries(GRAMMAR.map(g => [g.id, g]));
@@ -325,7 +588,8 @@ export function audioList() {
   for (const c of CHARS) out['c_' + c.c.codePointAt(0).toString(16)] = c.c;
   for (const w of WORDS) out['w_' + w.id] = w.hz;
   for (const s of SENTENCES) out[s.id] = s.hz;
-  for (const d of DIALOGUE) out[d.s] = d.hz;
+  for (const d of [...DIALOGUE, ...HELLO]) out[d.s] = d.hz;
+  for (const x of [...SOUND_CHART.initials, ...SOUND_CHART.finals]) { const id = exAudio(x.ex); if (!(id in out)) out[id] = x.ex; }
   for (const g of GRAMMAR) g.ok.forEach((t, i) => { out[g.id + '_' + i] = t; });
   return out;
 }
